@@ -99,27 +99,28 @@ func _render_ending() -> void:
 	new_game_plus_btn.visible = EndingEvaluator.unlocks_ng_plus(_ending_id)
 
 func _type_voice(full_text: String) -> void:
+	# Use a character counter variable so the typewriter effect advances correctly.
+	# Closures in Godot 4 capture by reference via arrays/dicts for mutable state.
+	var char_count := [0]
+	system_voice.modulate.a = 1.0
+	system_voice.text = ""
+
 	var tween := create_tween()
-	tween.tween_interval(1.5)  # Wait before starting
+	tween.tween_interval(1.5)  # Brief pause before System Voice begins
 	tween.finished.connect(func() -> void:
 		var tw2 := create_tween()
-		var chars_per_step := 1
 		for i: int in range(full_text.length()):
 			tw2.tween_callback(func() -> void:
-				system_voice.text = '[color=#FFB000][i]"%s"[/i][/color]' % full_text.substr(0, system_voice.text.count("") + 1)
+				char_count[0] += 1
+				system_voice.text = '[color=#FFB000][i]"%s"[/i][/color]' % full_text.substr(0, char_count[0])
 			)
 			tw2.tween_interval(0.04)
 		tw2.finished.connect(func() -> void:
+			# Ensure the full text is set exactly on completion
 			system_voice.text = '[color=#FFB000][i]"%s"[/i][/color]' % full_text
 			_show_post_credits()
 		)
 	)
-	# Simpler approach: just set text with delay
-	system_voice.text = '[color=#FFB000][i]"%s"[/i][/color]' % full_text
-	var fade_in := create_tween()
-	fade_in.tween_interval(1.0)
-	fade_in.tween_property(system_voice, "modulate:a", 1.0, 2.0).from(0.0)
-	fade_in.finished.connect(_show_post_credits)
 
 func _show_post_credits() -> void:
 	var tween := create_tween()

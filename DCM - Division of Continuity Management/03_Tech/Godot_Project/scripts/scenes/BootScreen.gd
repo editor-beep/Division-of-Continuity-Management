@@ -100,9 +100,9 @@ func _advance_to_next_line() -> void:
 
 func _type_next_char(_delta: float) -> void:
 	if _current_char < _full_current_line.length():
-		boot_text.text += _full_current_line[_current_char]
+		var ch: String = _full_current_line[_current_char]
+		boot_text.text += ch
 		_current_char += 1
-		var ch: String = _full_current_line[_current_char - 1]
 		_typing_timer = 0.06 if ch not in [".", ",", "…"] else 0.25
 	else:
 		# Line done — move to next

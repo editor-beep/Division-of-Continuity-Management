@@ -277,11 +277,13 @@ func _check_dissolution_thresholds() -> void:
 			dissolution_threshold_crossed.emit(threshold)
 
 func _update_clearance_level() -> void:
+	# Clearance levels 1–3 cover Days 1–3 (the current shipped content).
+	# Levels 4–5 are reserved for future Day 4+ content.
 	var new_level: int = 1
 	if current_day >= 2: new_level = 2
-	if current_day >= 4: new_level = 3
-	if current_day >= 6: new_level = 4
-	if current_day >= 9: new_level = 5
+	if current_day >= 3: new_level = 3
+	if current_day >= 5: new_level = 4  # Future Day 5+ content
+	if current_day >= 8: new_level = 5  # Future Day 8+ content
 	if new_level > clearance_level:
 		clearance_level = new_level
 		state_changed.emit("clearance_level", clearance_level)
