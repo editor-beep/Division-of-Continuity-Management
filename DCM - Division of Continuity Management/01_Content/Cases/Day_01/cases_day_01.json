@@ -1,0 +1,524 @@
+{
+  "day": 1,
+  "opening_text": "Good morning, beloved Processor. Your Continuity File remains stable. Today's queue has been gently calibrated for your provisional clearance. Process all cases with care. The threads you touch today will echo.",
+  "cases": [
+    {
+      "id": "case_001",
+      "day": 1,
+      "form_type": "R-19",
+      "form_title": "Recreational Reallocation Request",
+      "title": "Hobby Compression",
+      "clearance_required": 1,
+      "is_return_case": false,
+      "requires_flag": "",
+      "worker_unit": {
+        "id": "E-7742",
+        "name": "Marcus Hale",
+        "age": 34,
+        "occupation": "Mid-Level Archivist"
+      },
+      "issue": "Unproductive attachment to a model train collection. Minor entropic drag on domestic sector.",
+      "system_note": "Small repeating patterns bring comfort to many. But comfort, like all things, must serve.",
+      "sections": [
+        {
+          "id": "section_a",
+          "title": "Section A: Symbolic Valuation",
+          "fields": [
+            {
+              "id": "reclassification",
+              "type": "choice",
+              "label": "Reclassify the hobby:",
+              "required": true,
+              "options": [
+                {
+                  "id": "wholesome_nostalgia",
+                  "label": "Wholesome Nostalgia",
+                  "sublabel": "stable, low yield",
+                  "effects": { "efficiency_score": 3.0, "dissolution_index": 0.3, "reality_stability": 0.5 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "small", "text": "A warm haze of permitted nostalgia settled gently over the domestic sector." }]
+                },
+                {
+                  "id": "latent_engineering",
+                  "label": "Latent Engineering Aptitude",
+                  "sublabel": "redirect to approved channels",
+                  "effects": { "efficiency_score": 6.0, "dissolution_index": 0.8, "continuity_contribution": 5.0 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "small", "text": "Engineering sector productivity projections have been quietly updated." }]
+                },
+                {
+                  "id": "escapist_regression",
+                  "label": "Escapist Regression",
+                  "sublabel": "compress and route surplus",
+                  "effects": { "efficiency_score": 4.0, "dissolution_index": 0.5, "department_strain": 2.0 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "small", "text": "A minor increase in compressed longing has been routed to approved recreational channels." }]
+                },
+                {
+                  "id": "sacred_geometry",
+                  "label": "Sacred Geometry Practice",
+                  "sublabel": "elevate — high risk, high reward",
+                  "effects": { "efficiency_score": -2.0, "dissolution_index": 1.5, "mythic_residue": 5.0, "reality_stability": -1.0 },
+                  "flags_set": ["marcus_sacred_geometry"],
+                  "ripples": [{ "type": "medium", "text": "Unusual geometric patterns have been observed in the domestic sector. A minor reality tremor was recorded.", "delayed_effects": { "department_strain": 3.0 } }]
+                }
+              ]
+            },
+            {
+              "id": "surplus_slider",
+              "type": "slider",
+              "label": "Emotional surplus calibration:",
+              "description": "Adjust the permitted emotional weight attached to this reclassification. [42 / 100]",
+              "min": 0,
+              "max": 100,
+              "default": 42,
+              "effects_at_min": { "emotional_surplus": -3.0 },
+              "effects_at_max": { "emotional_surplus": 3.0 }
+            }
+          ]
+        },
+        {
+          "id": "section_b",
+          "title": "Section B: Recommended Action",
+          "fields": [
+            {
+              "id": "action",
+              "type": "choice",
+              "label": "Recommended Action:",
+              "required": true,
+              "options": [
+                {
+                  "id": "approve_monitoring",
+                  "label": "Approve continued practice with monitoring",
+                  "effects": { "efficiency_score": 2.0, "emotional_surplus": 3.0 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "small", "text": "Worker-Unit E-7742 has been placed under gentle recreational surveillance." }]
+                },
+                {
+                  "id": "mandate_therapy",
+                  "label": "Mandate conversion into Productive Miniaturization Therapy",
+                  "effects": { "efficiency_score": 7.0, "dissolution_index": 1.5, "continuity_contribution": 8.0 },
+                  "flags_set": ["marcus_hobby_converted"],
+                  "ripples": [{ "type": "medium", "text": "Worker-Unit E-7742 has been enrolled in Approved Miniaturization Therapy. Productivity projections improved by 12%.", "delayed_effects": {} }]
+                },
+                {
+                  "id": "full_liquidation",
+                  "label": "Order full symbolic liquidation (memories repurposed)",
+                  "effects": { "efficiency_score": 10.0, "dissolution_index": 3.0, "continuity_contribution": 15.0 },
+                  "flags_set": ["marcus_hobby_liquidated"],
+                  "ripples": [{ "type": "major", "text": "Worker-Unit E-7742's model train collection has been fully liquidated. His memories have been reclassified as archived training material. A mild sense of lightness has been reported in his productivity file.", "delayed_effects": { "collective_nostalgia": -2.0 } }]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "completion_flag": "marcus_hobby_classified",
+      "unlocks_on_completion": []
+    },
+
+    {
+      "id": "case_002",
+      "day": 1,
+      "form_type": "G-7",
+      "form_title": "Grief Commercialization Assessment",
+      "title": "Inherited Grief",
+      "clearance_required": 1,
+      "is_return_case": false,
+      "requires_flag": "",
+      "worker_unit": {
+        "id": "F-1193",
+        "name": "Elena Voss",
+        "age": 29,
+        "occupation": "Primary School Educator"
+      },
+      "issue": "High-yield ancestral grief leaking into her professional emotional field.",
+      "system_note": "Some sorrows are more useful than others. This is stewardship, not cruelty.",
+      "sections": [
+        {
+          "id": "section_a",
+          "title": "Section A: Grief Classification",
+          "fields": [
+            {
+              "id": "grief_routing",
+              "type": "choice",
+              "label": "Which inherited griefs remain commercially productive?",
+              "required": true,
+              "options": [
+                {
+                  "id": "artistic_fuel",
+                  "label": "Melancholy suitable for artistic fuel",
+                  "effects": { "mythic_commodities_index": 5.0, "collective_nostalgia": 3.0, "dissolution_index": 0.5 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "small", "text": "The arts district has reported a subtle increase in melancholic productivity." }]
+                },
+                {
+                  "id": "quiet_resilience",
+                  "label": "Quiet Resilience narrative (national stability value)",
+                  "effects": { "reality_stability": 3.0, "efficiency_score": 5.0, "dissolution_index": 0.4 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "small", "text": "A small contribution to the national resilience index has been logged." }]
+                },
+                {
+                  "id": "repressible_trauma",
+                  "label": "Repressible Trauma (route to Erasure & Redaction)",
+                  "effects": { "efficiency_score": 8.0, "dissolution_index": 1.5, "department_strain": 1.0 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "medium", "text": "Worker-Unit F-1193's trauma records have been queued for Erasure processing.", "delayed_effects": {} }]
+                },
+                {
+                  "id": "catalytic_rage",
+                  "label": "Catalytic Rage (volatile — recommend Mythic Commodities)",
+                  "effects": { "mythic_commodities_index": 10.0, "dissolution_index": 2.0, "reality_stability": -3.0 },
+                  "flags_set": ["elena_rage_volatile"],
+                  "ripples": [{ "type": "major", "text": "Volatile grief energy has been routed to the Mythic Commodities Division. Containment protocols are standing by.", "delayed_effects": { "department_strain": 2.0 } }]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "section_b",
+          "title": "Section B: Memory Taxonomy",
+          "fields": [
+            {
+              "id": "memory_classification",
+              "type": "choice",
+              "label": "Reclassify childhood memories of her grandmother as:",
+              "required": true,
+              "options": [
+                {
+                  "id": "training_data",
+                  "label": "Training Data",
+                  "sublabel": "extracted and repurposed",
+                  "effects": { "efficiency_score": 8.0, "dissolution_index": 1.5 },
+                  "flags_set": ["elena_grief_rerouted"],
+                  "ripples": [{ "type": "medium", "text": "Memory extract from Worker-Unit F-1193 has been processed and filed in the training archive.", "delayed_effects": {} }]
+                },
+                {
+                  "id": "cautionary_tale",
+                  "label": "Cautionary Tale",
+                  "sublabel": "reclassified as educational material",
+                  "effects": { "efficiency_score": 4.0, "dissolution_index": 0.8 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "small", "text": "The story of Elena Voss's grandmother has been filed as an approved cautionary narrative." }]
+                },
+                {
+                  "id": "preserved_anchor",
+                  "label": "Preserved Sacred Anchor",
+                  "sublabel": "retained at personal cost",
+                  "effects": { "efficiency_score": -3.0, "dissolution_index": -0.5, "emotional_surplus": 5.0, "narrative_stability": 2.0 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "small", "text": "A small act of preservation. The archive notes a minor anomaly: something was kept whole." }]
+                },
+                {
+                  "id": "redacted",
+                  "label": "Redacted for Systemic Health",
+                  "sublabel": "full erasure — high yield",
+                  "effects": { "efficiency_score": 10.0, "dissolution_index": 2.5, "department_strain": 2.0 },
+                  "flags_set": ["elena_memories_redacted"],
+                  "ripples": [{ "type": "major", "text": "Worker-Unit F-1193's ancestral memory cluster has been fully redacted. She will feel lighter tomorrow. She may not remember why.", "delayed_effects": { "collective_nostalgia": -3.0 } }]
+                }
+              ]
+            },
+            {
+              "id": "renarration",
+              "type": "text",
+              "label": "Optional: One-sentence re-narration to increase MEV.",
+              "description": "Provide an approved reclassification phrase. Example: 'My grandmother's grief taught me the approved value of endurance.'",
+              "placeholder": "Enter re-narration to increase MEV yield…"
+            }
+          ]
+        }
+      ],
+      "completion_flag": "elena_grief_processed",
+      "unlocks_on_completion": []
+    },
+
+    {
+      "id": "case_003",
+      "day": 1,
+      "form_type": "D-14",
+      "form_title": "Developmental Compression Audit",
+      "title": "Childhood Reclassification",
+      "clearance_required": 1,
+      "is_return_case": false,
+      "requires_flag": "",
+      "worker_unit": {
+        "id": "G-5521",
+        "name": "Theo Arlen",
+        "age": 41,
+        "occupation": "Logistics Coordinator"
+      },
+      "issue": "Excessive retention of magical thinking from ages 6–9. Risk of narrative contamination to offspring.",
+      "system_note": "The child is father to the man. Sometimes the child must be gently retired.",
+      "sections": [
+        {
+          "id": "section_a",
+          "title": "Section A: Developmental Compression",
+          "fields": [
+            {
+              "id": "compression_decision",
+              "type": "choice",
+              "label": "Reclassify childhood as training?",
+              "required": true,
+              "options": [
+                {
+                  "id": "full_compression",
+                  "label": "Yes — Full compression into 'Early Discipline & Wonder Management'",
+                  "effects": { "efficiency_score": 8.0, "dissolution_index": 2.5, "continuity_contribution": 12.0 },
+                  "flags_set": ["theo_childhood_compressed"],
+                  "ripples": [{ "type": "major", "text": "Worker-Unit G-5521's developmental wonder archives have been fully compressed. Productivity projections for his household are excellent.", "delayed_effects": { "collective_nostalgia": -1.5 } }]
+                },
+                {
+                  "id": "partial_preservation",
+                  "label": "Partial — Preserve select wonder fragments",
+                  "effects": { "efficiency_score": 4.0, "dissolution_index": 1.0, "emotional_surplus": 2.0 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "medium", "text": "A small collection of approved wonder fragments has been archived. They hum quietly in the ledger.", "delayed_effects": {} }]
+                },
+                {
+                  "id": "no_leakage",
+                  "label": "No — Allow controlled leakage",
+                  "effects": { "efficiency_score": -2.0, "emotional_surplus": 5.0, "mythic_residue": 3.0 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "medium", "text": "Controlled wonder leakage approved. Sector analysts predict minor uptick in 'unexplained phenomena' reports.", "delayed_effects": { "department_strain": 2.0 } }]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "section_b",
+          "title": "Section B: Taxonomy Alignment",
+          "fields": [
+            {
+              "id": "taxonomy",
+              "type": "choice",
+              "label": "The 'talking to trees' phase should be classified as:",
+              "required": true,
+              "options": [
+                {
+                  "id": "delusional",
+                  "label": "Delusional",
+                  "sublabel": "standard classification",
+                  "effects": { "efficiency_score": 6.0, "dissolution_index": 1.5 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "small", "text": "The developmental delusion has been properly classified and filed." }]
+                },
+                {
+                  "id": "empathy_training",
+                  "label": "Pre-Scientific Empathy Training",
+                  "sublabel": "retroactively approved",
+                  "effects": { "efficiency_score": 3.0, "dissolution_index": 0.5 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "small", "text": "An uncommon but accepted reclassification. The archive marks this case as 'gently unusual.'" }]
+                },
+                {
+                  "id": "shamanic_resonance",
+                  "label": "Minor Shamanic Resonance",
+                  "sublabel": "flag for observation",
+                  "effects": { "mythic_residue": 4.0, "dissolution_index": 0.3, "reality_stability": -0.5 },
+                  "flags_set": ["theo_shamanic_flagged"],
+                  "ripples": [{ "type": "medium", "text": "Worker-Unit G-5521 has been flagged for Mythic Sensitivity Observation. The trees have not been contacted.", "delayed_effects": {} }]
+                },
+                {
+                  "id": "harmless_fiction",
+                  "label": "Harmless Fiction",
+                  "sublabel": "minimal processing required",
+                  "effects": { "efficiency_score": 2.0, "dissolution_index": 0.2, "emotional_surplus": 1.0 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "small", "text": "The childhood fiction has been appropriately minimised. Nothing to see here." }]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "completion_flag": "theo_childhood_audited",
+      "unlocks_on_completion": []
+    },
+
+    {
+      "id": "case_004",
+      "day": 1,
+      "form_type": "DN-22",
+      "form_title": "Dyadic Narrative Alignment",
+      "title": "Partnership Continuity",
+      "clearance_required": 1,
+      "is_return_case": false,
+      "requires_flag": "",
+      "worker_unit": {
+        "id": "H-3389/H-3390",
+        "name": "The Langfords",
+        "age": 0,
+        "occupation": "Domestic Partnership Unit"
+      },
+      "issue": "Diverging personal narratives threatening local relational infrastructure.",
+      "system_note": "Love is beautiful. Approved love is eternal.",
+      "sections": [
+        {
+          "id": "section_a",
+          "title": "Section A: Narrative Alignment",
+          "fields": [
+            {
+              "id": "alignment_recommendation",
+              "type": "choice",
+              "label": "Primary recommendation:",
+              "required": true,
+              "options": [
+                {
+                  "id": "full_synchronisation",
+                  "label": "Full synchronization (one story absorbs the other)",
+                  "effects": { "efficiency_score": 8.0, "reality_stability": 3.0, "dissolution_index": 1.5 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "medium", "text": "The Langfords' narratives have been harmonised into a single approved domestic story. The merger was seamless.", "delayed_effects": {} }]
+                },
+                {
+                  "id": "strategic_divergence",
+                  "label": "Strategic divergence with managed tension",
+                  "effects": { "efficiency_score": 4.0, "collective_nostalgia": 5.0, "narrative_stability": 2.0 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "small", "text": "Approved tension has been logged. Their divergence has been classified as 'productive narrative friction.'" }]
+                },
+                {
+                  "id": "amicable_reclassification",
+                  "label": "Amicable reclassification to 'Former Significant Others'",
+                  "effects": { "efficiency_score": 2.0, "emotional_surplus": 3.0, "department_strain": 1.0 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "small", "text": "The partnership has been reclassified. Both units report a mild sense of relief mixed with inexplicable grief." }]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "section_b",
+          "title": "Section B: Identity Priority",
+          "fields": [
+            {
+              "id": "priority_weighting",
+              "type": "choice",
+              "label": "Which partner's identity receives priority weighting?",
+              "required": true,
+              "options": [
+                {
+                  "id": "h3389_priority",
+                  "label": "H-3389 (primary narrative weight)",
+                  "effects": { "efficiency_score": 2.0 },
+                  "flags_set": ["langford_h3389_priority"],
+                  "ripples": [{ "type": "small", "text": "H-3389's narrative has been designated the primary continuity thread." }]
+                },
+                {
+                  "id": "h3390_priority",
+                  "label": "H-3390 (primary narrative weight)",
+                  "effects": { "efficiency_score": 2.0 },
+                  "flags_set": ["langford_h3390_priority"],
+                  "ripples": [{ "type": "small", "text": "H-3390's narrative has been designated the primary continuity thread." }]
+                },
+                {
+                  "id": "equal_weighting",
+                  "label": "Equal weighting (non-standard — may cause further narrative drift)",
+                  "effects": { "efficiency_score": -1.0, "reality_stability": -1.0, "narrative_stability": 3.0 },
+                  "flags_set": ["langford_equal_weight"],
+                  "ripples": [{ "type": "medium", "text": "Non-standard equal weighting applied. The Division notes this is unusual. Also, perhaps, kind.", "delayed_effects": {} }]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "completion_flag": "langfords_processed",
+      "unlocks_on_completion": []
+    },
+
+    {
+      "id": "case_005",
+      "day": 1,
+      "form_type": "Θ-SR1",
+      "form_title": "Self-Referential Audit",
+      "title": "Elevated Anomaly",
+      "clearance_required": 1,
+      "is_return_case": false,
+      "requires_flag": "",
+      "worker_unit": {
+        "id": "███-████",
+        "name": "Echo Fragment",
+        "age": 0,
+        "occupation": "Unclassified"
+      },
+      "issue": "File contains corrupted metadata referencing your own early records. Minor reality tremor detected.",
+      "system_note": "Some files feel familiar for good reason, Processor. We trust your judgment.",
+      "sections": [
+        {
+          "id": "section_a",
+          "title": "Section A: Fragment Recognition",
+          "fields": [
+            {
+              "id": "recognition",
+              "type": "choice",
+              "label": "Does this fragment match any part of your own Continuity File?",
+              "required": true,
+              "options": [
+                {
+                  "id": "yes_recognise",
+                  "label": "Yes — I recognise this fragment",
+                  "effects": { "dissolution_index": 0.5, "narrative_stability": -1.0 },
+                  "flags_set": ["echo_recognised"],
+                  "ripples": [{ "type": "small", "text": "Your recognition has been noted. The fragment is watching you note it." }]
+                },
+                {
+                  "id": "no_recognise",
+                  "label": "No — this is an external case",
+                  "effects": { "efficiency_score": 1.0 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "small", "text": "Your denial has been filed under Standard Self-Preservation Protocol." }]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "section_b",
+          "title": "Section B: Recommended Action",
+          "fields": [
+            {
+              "id": "echo_action",
+              "type": "choice",
+              "label": "Action:",
+              "required": true,
+              "options": [
+                {
+                  "id": "reintegrate",
+                  "label": "Reintegrate (↑ Dissolution Index)",
+                  "sublabel": "absorb the fragment into your file",
+                  "effects": { "dissolution_index": 2.5, "mythic_residue": 3.0 },
+                  "flags_set": ["echo_awareness"],
+                  "ripples": [{ "type": "major", "text": "Echo Fragment has been successfully reintegrated into your Continuity File. You feel slightly more complete. Or slightly less.", "delayed_effects": { "narrative_stability": -2.0 } }]
+                },
+                {
+                  "id": "redact",
+                  "label": "Redact (stabilize your file)",
+                  "sublabel": "safe but something is lost",
+                  "effects": { "narrative_stability": 3.0, "dissolution_index": 0.5 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "medium", "text": "The fragment has been redacted. The minor tremor has stabilised. You feel nothing unusual about this.", "delayed_effects": {} }]
+                },
+                {
+                  "id": "elevate_study",
+                  "label": "Elevate & Study (deeper lore + risk)",
+                  "sublabel": "learn more, risk more",
+                  "effects": { "mythic_residue": 5.0, "dissolution_index": 1.5, "reality_stability": -1.0 },
+                  "flags_set": ["echo_elevated", "echo_awareness"],
+                  "ripples": [{ "type": "major", "text": "The fragment has been elevated to Observation Status. It continues to reference your file. You continue to reference it. The Division watches you both with interest.", "delayed_effects": { "department_strain": 2.0 } }]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "completion_flag": "echo_fragment_day1_processed",
+      "unlocks_on_completion": []
+    }
+  ]
+}
