@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcmfield00001"]
+
+[ext_resource type="Script" path="res://scripts/ui/FormField.gd" id="1_ff01"]
+
+[node name="FormField" type="VBoxContainer"]
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+script = ExtResource("1_ff01")

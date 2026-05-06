@@ -1,0 +1,104 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcmendday0001"]
+
+[ext_resource type="Script" path="res://scripts/scenes/EndOfDaySummary.gd" id="1_sum01"]
+
+[node name="EndOfDaySummary" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sum01")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.039, 0.039, 0.059, 1.0)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 200.0
+offset_right = -200.0
+offset_top = 20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ContentContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+
+[node name="TitleLabel" type="Label" parent="ScrollContainer/ContentContainer"]
+layout_mode = 2
+text = "— END OF DAY —"
+horizontal_alignment = 1
+add_theme_color_override("font_color", Color(1.0, 0.69, 0.0, 1.0))
+theme_override_font_sizes/font_size = 22
+
+[node name="TitleSep" type="HSeparator" parent="ScrollContainer/ContentContainer"]
+layout_mode = 2
+
+[node name="StatsTitle" type="Label" parent="ScrollContainer/ContentContainer"]
+layout_mode = 2
+text = "PERSONAL IMPACT:"
+add_theme_color_override("font_color", Color(0.6, 0.6, 0.6, 1.0))
+
+[node name="StatsDeltaContainer" type="VBoxContainer" parent="ScrollContainer/ContentContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="StatsDeltaSep" type="HSeparator" parent="ScrollContainer/ContentContainer"]
+layout_mode = 2
+
+[node name="RipplesTitle" type="Label" parent="ScrollContainer/ContentContainer"]
+layout_mode = 2
+text = "Notable Ripples:"
+add_theme_color_override("font_color", Color(1.0, 0.69, 0.0, 1.0))
+
+[node name="RipplesContainer" type="VBoxContainer" parent="ScrollContainer/ContentContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="UnlockSep" type="HSeparator" parent="ScrollContainer/ContentContainer"]
+layout_mode = 2
+
+[node name="UnlockLabel" type="Label" parent="ScrollContainer/ContentContainer"]
+layout_mode = 2
+text = ""
+add_theme_color_override("font_color", Color(0.549, 0.306, 1.0, 1.0))
+visible = false
+
+[node name="ActionsContainer" type="HBoxContainer" parent="ScrollContainer/ContentContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ReviewFileButton" type="Button" parent="ScrollContainer/ContentContainer/ActionsContainer"]
+layout_mode = 2
+text = "REVIEW YOUR CONTINUITY FILE"
+
+[node name="ActionsSpacer" type="Control" parent="ScrollContainer/ContentContainer/ActionsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ProceedButton" type="Button" parent="ScrollContainer/ContentContainer/ActionsContainer"]
+layout_mode = 2
+text = "PROCEED TO NEXT SHIFT →"
+
+[node name="CRTOverlay" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+mouse_filter = 2

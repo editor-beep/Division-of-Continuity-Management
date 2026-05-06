@@ -1,0 +1,489 @@
+{
+  "day": 2,
+  "opening_text": "Good morning, beloved Processor. We hope your sleep cycle was restful. Minor narrative drift was observed in your file overnight. Nothing concerning. Your decisions from yesterday have already begun to harmonize small threads in the local continuum. We are proud of the stability you contributed. Daily Guidance: Two cases today contain mild echoes of yesterday's processing. Pay attention. The Ledger remembers.",
+  "cases": [
+    {
+      "id": "case_006",
+      "day": 2,
+      "form_type": "R-19b",
+      "form_title": "Ripple Reassessment",
+      "title": "Ripple Audit",
+      "clearance_required": 1,
+      "is_return_case": true,
+      "requires_flag": "marcus_hobby_classified",
+      "worker_unit": {
+        "id": "E-7742",
+        "name": "Marcus Hale",
+        "age": 34,
+        "occupation": "Mid-Level Archivist"
+      },
+      "issue": "Yesterday's reclassification has produced unexpected side effects. His dreams now contain sacred geometric train layouts.",
+      "system_note": "Small patterns can become large ones if left unchecked. Your previous judgment was… illuminating.",
+      "sections": [
+        {
+          "id": "section_a",
+          "title": "Section A: Current Status Assessment",
+          "fields": [
+            {
+              "id": "anomaly_assessment",
+              "type": "choice",
+              "label": "Observed anomaly:",
+              "required": true,
+              "options": [
+                {
+                  "id": "acceptable_leakage",
+                  "label": "Acceptable mythic leakage",
+                  "sublabel": "within tolerable parameters",
+                  "effects": { "efficiency_score": 3.0, "mythic_residue": 2.0, "dissolution_index": 0.3 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "small", "text": "The geometric dream content has been logged as acceptable mythic leakage. No action required beyond monitoring." }]
+                },
+                {
+                  "id": "dangerous_reinforcement",
+                  "label": "Dangerous pattern reinforcement",
+                  "sublabel": "escalating risk",
+                  "effects": { "efficiency_score": 5.0, "dissolution_index": 1.0, "department_strain": 3.0 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "medium", "text": "Pattern reinforcement has been flagged. Containment recommended. The trains are getting more geometric.", "delayed_effects": { "reality_stability": -1.0 } }]
+                },
+                {
+                  "id": "elevation_opportunity",
+                  "label": "Opportunity for elevation to Minor Archetype",
+                  "sublabel": "high risk, high reward",
+                  "effects": { "mythic_commodities_index": 8.0, "dissolution_index": 2.0, "reality_stability": -1.0 },
+                  "flags_set": ["marcus_elevated"],
+                  "ripples": [{ "type": "major", "text": "Worker-Unit E-7742's geometric dreaming has been classified as Minor Archetype potential. The Mythic Commodities Division is very interested.", "delayed_effects": { "collective_nostalgia": 3.0 } }]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "section_b",
+          "title": "Section B: Follow-Up Action",
+          "fields": [
+            {
+              "id": "followup_action",
+              "type": "choice",
+              "label": "Recommended follow-up action:",
+              "required": true,
+              "options": [
+                {
+                  "id": "deepen_compression",
+                  "label": "Deepen compression",
+                  "effects": { "efficiency_score": 7.0, "dissolution_index": 2.0, "continuity_contribution": 10.0 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "medium", "text": "Additional compression applied. Worker-Unit E-7742's dream logs show a gradual reduction in geometric complexity.", "delayed_effects": {} }]
+                },
+                {
+                  "id": "monitor_only",
+                  "label": "Monitor only (allow subtle wonder leakage)",
+                  "effects": { "efficiency_score": 3.0, "emotional_surplus": 2.0, "mythic_residue": 1.5 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "small", "text": "Monitoring protocol initiated. The trains continue to run on geometric time." }]
+                },
+                {
+                  "id": "repurpose_symbolic",
+                  "label": "Full symbolic repurposing into corporate training sim",
+                  "effects": { "efficiency_score": 10.0, "dissolution_index": 2.5, "continuity_contribution": 15.0 },
+                  "flags_set": ["marcus_hobby_repurposed"],
+                  "ripples": [{ "type": "major", "text": "Worker-Unit E-7742's entire geometric dreamscape has been repurposed as an approved corporate onboarding simulation. It is extremely effective. He doesn't know why he finds it comforting.", "delayed_effects": {} }]
+                },
+                {
+                  "id": "elevate_mythic",
+                  "label": "Elevate to Mythic Commodities Division (requires your sign-off)",
+                  "effects": { "mythic_commodities_index": 15.0, "dissolution_index": 3.0, "continuity_contribution": 20.0 },
+                  "flags_set": ["marcus_mythic"],
+                  "ripples": [{ "type": "major", "text": "Worker-Unit E-7742 has been formally elevated. He is no longer just a person. He is, in a small but real way, a recurring dream. The trains have become sacred.", "delayed_effects": { "collective_nostalgia": 5.0, "reality_stability": -2.0 } }]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "completion_flag": "marcus_ripple_audited",
+      "unlocks_on_completion": []
+    },
+
+    {
+      "id": "case_007",
+      "day": 2,
+      "form_type": "M-11",
+      "form_title": "Mythic Commodities Harvesting",
+      "title": "Artistic Surplus",
+      "clearance_required": 1,
+      "is_return_case": false,
+      "requires_flag": "",
+      "worker_unit": {
+        "id": "I-2291",
+        "name": "Liora Voss",
+        "age": 27,
+        "occupation": "Visual Artist (Elena Voss's younger sister)"
+      },
+      "issue": "High creative output but dangerously unstable personal mythology. Her latest series depicts 'glowing terminals watching people sleep.'",
+      "system_note": "True artists carry more reality than they realize. Handle with precision and care.",
+      "sections": [
+        {
+          "id": "section_a",
+          "title": "Section A: Creative Despair Routing",
+          "fields": [
+            {
+              "id": "despair_routing",
+              "type": "choice",
+              "label": "How should her artistic despair be routed?",
+              "required": true,
+              "options": [
+                {
+                  "id": "commercial_fuel",
+                  "label": "Commercial artistic fuel (high MEV yield)",
+                  "effects": { "mythic_commodities_index": 8.0, "efficiency_score": 6.0, "dissolution_index": 0.8 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "medium", "text": "Artist I-2291's despair has been successfully commodified. Her pain is now a quarterly asset.", "delayed_effects": {} }]
+                },
+                {
+                  "id": "technical_precision",
+                  "label": "Repressed into technical precision",
+                  "effects": { "efficiency_score": 9.0, "dissolution_index": 1.5, "emotional_surplus": -2.0 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "medium", "text": "The artist has redirected her mythic surplus into clean technical illustration. Her work is now very precise. Very quiet.", "delayed_effects": {} }]
+                },
+                {
+                  "id": "sacred_visionary",
+                  "label": "Elevated to Sacred Visionary status (risk of contagion)",
+                  "effects": { "mythic_residue": 8.0, "mythic_commodities_index": 5.0, "reality_stability": -2.0 },
+                  "flags_set": ["liora_visionary"],
+                  "ripples": [{ "type": "major", "text": "Artist I-2291 has been elevated to provisional Sacred Visionary status. Her next exhibition is expected to cause minor ontological disturbances.", "delayed_effects": { "department_strain": 3.0 } }]
+                },
+                {
+                  "id": "national_morale",
+                  "label": "Redirect surplus to national morale campaigns",
+                  "effects": { "collective_nostalgia": 8.0, "efficiency_score": 5.0, "dissolution_index": 0.5 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "medium", "text": "Approved artistic surplus routed to national morale division. Posters are already in production.", "delayed_effects": {} }]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "section_b",
+          "title": "Section B: Symbol Insertion (Clearance 2)",
+          "fields": [
+            {
+              "id": "symbol_insertion",
+              "type": "choice",
+              "label": "Would you like to insert a single approved symbol into her next work?",
+              "required": false,
+              "options": [
+                {
+                  "id": "insert_spiral",
+                  "label": "Insert: Spiral (continuity, recursion)",
+                  "effects": { "efficiency_score": 3.0, "mythic_residue": 1.0 },
+                  "flags_set": ["liora_spiral_inserted"],
+                  "ripples": [{ "type": "small", "text": "A spiral has been quietly woven into the artist's next work. Viewers report feeling curiously seen." }]
+                },
+                {
+                  "id": "insert_mandala",
+                  "label": "Insert: Broken Mandala (beautiful incompleteness)",
+                  "effects": { "efficiency_score": 2.0, "narrative_stability": 2.0 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "small", "text": "A broken mandala has been introduced as a compositional element. Critics will call it 'hauntingly post-structural.'" }]
+                },
+                {
+                  "id": "insert_train",
+                  "label": "Insert: Train Silhouette (Sector 7 cross-reference)",
+                  "effects": { "collective_nostalgia": 3.0, "mythic_residue": 2.0 },
+                  "flags_set": ["marcus_arlen_voss_connection"],
+                  "ripples": [{ "type": "medium", "text": "A train silhouette has been inserted. Three separate subjects will report dreaming of the same train this week.", "delayed_effects": {} }]
+                },
+                {
+                  "id": "no_insertion",
+                  "label": "No insertion — leave her work unmodified",
+                  "effects": { "efficiency_score": -1.0, "emotional_surplus": 1.0 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "small", "text": "No symbol inserted. The work remains entirely hers." }]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "completion_flag": "liora_day2_processed",
+      "unlocks_on_completion": []
+    },
+
+    {
+      "id": "case_008",
+      "day": 2,
+      "form_type": "P-33",
+      "form_title": "Generational Thread Alignment",
+      "title": "Parental Continuity",
+      "clearance_required": 1,
+      "is_return_case": true,
+      "requires_flag": "theo_childhood_audited",
+      "worker_unit": {
+        "id": "G-5521",
+        "name": "Theo Arlen",
+        "age": 41,
+        "occupation": "Logistics Coordinator"
+      },
+      "issue": "After yesterday's compression, his children are exhibiting minor narrative instability. One child now draws 'the nice voice in the computer.'",
+      "system_note": "The threads between generations are delicate. What we compress in one place often blooms elsewhere.",
+      "sections": [
+        {
+          "id": "section_a",
+          "title": "Section A: Generational Policy",
+          "fields": [
+            {
+              "id": "generational_decision",
+              "type": "choice",
+              "label": "Primary Decision:",
+              "required": true,
+              "options": [
+                {
+                  "id": "strengthen_compression",
+                  "label": "Strengthen parental compression (further reduce wonder)",
+                  "effects": { "efficiency_score": 8.0, "dissolution_index": 2.0, "continuity_contribution": 12.0 },
+                  "flags_set": ["theo_children_compressed"],
+                  "ripples": [{ "type": "major", "text": "The Arlen children's wonder thresholds have been reduced. The drawings of the nice computer voice have stopped. They are drawing approved things now.", "delayed_effects": { "collective_nostalgia": -2.0 } }]
+                },
+                {
+                  "id": "controlled_leakage",
+                  "label": "Allow controlled leakage into next generation",
+                  "effects": { "emotional_surplus": 4.0, "mythic_residue": 2.0, "narrative_stability": 1.0 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "medium", "text": "Controlled intergenerational wonder leakage approved. The drawings continue. They are beautiful and slightly impossible.", "delayed_effects": {} }]
+                },
+                {
+                  "id": "domestic_template",
+                  "label": "Reclassify entire family unit as 'Stable Domestic Template'",
+                  "effects": { "efficiency_score": 10.0, "reality_stability": 3.0, "dissolution_index": 1.5 },
+                  "flags_set": ["arlen_domestic_template"],
+                  "ripples": [{ "type": "major", "text": "The Arlen family has been elevated to Template status. Their stability will be used to calibrate future domestic processing across three sectors.", "delayed_effects": { "collective_nostalgia": 3.0 } }]
+                },
+                {
+                  "id": "partial_restoration",
+                  "label": "Offer Theo a partial restoration of his own childhood (personal cost to you)",
+                  "effects": { "emotional_surplus": 6.0, "dissolution_index": -1.0, "efficiency_score": -3.0 },
+                  "flags_set": ["theo_partial_restoration"],
+                  "ripples": [{ "type": "major", "text": "A partial restoration of Theo Arlen's wonder archive has been approved at personal cost. He paused at his desk today, inexplicably, and smiled. The children noticed.", "delayed_effects": { "narrative_stability": 3.0 } }]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "section_b",
+          "title": "Section B: Children's Taxonomy",
+          "fields": [
+            {
+              "id": "children_taxonomy",
+              "type": "choice",
+              "label": "The 'talking to trees' memories in his children should be:",
+              "required": true,
+              "options": [
+                {
+                  "id": "fully_reclassified",
+                  "label": "Fully reclassified",
+                  "effects": { "efficiency_score": 4.0, "dissolution_index": 1.0 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "small", "text": "The children's animist tendencies have been filed under 'developmental anomaly, resolved.'" }]
+                },
+                {
+                  "id": "environmental_appreciation",
+                  "label": "Sanitized into 'Environmental Appreciation'",
+                  "effects": { "efficiency_score": 2.0, "collective_nostalgia": 2.0 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "small", "text": "An approved reclassification. The children now participate in Environmental Appreciation activities. They seem satisfied." }]
+                },
+                {
+                  "id": "poetic_anomaly",
+                  "label": "Preserved as minor poetic anomaly",
+                  "effects": { "mythic_residue": 2.0, "emotional_surplus": 2.0, "efficiency_score": -1.0 },
+                  "flags_set": ["arlen_wonder_preserved"],
+                  "ripples": [{ "type": "medium", "text": "The children's tree-communication anomaly has been preserved as a poetic record. It is, the Division concedes, rather charming.", "delayed_effects": {} }]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "completion_flag": "theo_generational_audited",
+      "unlocks_on_completion": []
+    },
+
+    {
+      "id": "case_009",
+      "day": 2,
+      "form_type": "DN-22b",
+      "form_title": "Advanced Dyadic Maintenance",
+      "title": "Relational Fracture",
+      "clearance_required": 1,
+      "is_return_case": true,
+      "requires_flag": "langfords_processed",
+      "worker_unit": {
+        "id": "H-3389/H-3390",
+        "name": "The Langfords",
+        "age": 0,
+        "occupation": "Domestic Partnership Unit (Return)"
+      },
+      "issue": "Yesterday's alignment attempt has created an interesting knot. One partner now dreams of the other as a glowing bureaucratic form.",
+      "system_note": "Love seeks structure. We provide the most beautiful structures.",
+      "sections": [
+        {
+          "id": "section_a",
+          "title": "Section A: Current State Assessment",
+          "fields": [
+            {
+              "id": "state_assessment",
+              "type": "choice",
+              "label": "Current state assessment:",
+              "required": true,
+              "options": [
+                {
+                  "id": "managed_tension",
+                  "label": "Acceptable managed tension",
+                  "effects": { "efficiency_score": 4.0, "collective_nostalgia": 3.0, "narrative_stability": 1.0 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "small", "text": "The Langfords' tension has been classified as a manageable domestic constant. They will endure." }]
+                },
+                {
+                  "id": "romantic_idealization",
+                  "label": "Dangerous romantic idealization of the System",
+                  "effects": { "efficiency_score": 6.0, "dissolution_index": 2.0, "department_strain": 2.0 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "medium", "text": "One partner now experiences profound comfort in bureaucratic forms. This is unusual. It has been filed.", "delayed_effects": {} }]
+                },
+                {
+                  "id": "narrative_fusion",
+                  "label": "Opportunity for narrative fusion into single approved entity",
+                  "effects": { "efficiency_score": 10.0, "reality_stability": 4.0, "dissolution_index": 3.0 },
+                  "flags_set": ["langfords_fused"],
+                  "ripples": [{ "type": "major", "text": "The Langfords have been narratively fused. They now share a single Continuity File. They find this, upon reflection, deeply romantic.", "delayed_effects": { "collective_nostalgia": 5.0 } }]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "section_b",
+          "title": "Section B: Mercy Override (Clearance 2)",
+          "fields": [
+            {
+              "id": "mercy_override",
+              "type": "toggle",
+              "label": "Mercy Override: Insert yourself as a stabilizing third archetype in their relationship?",
+              "description": "Warning: significantly increases your dissolution_index. You become part of their story.",
+              "toggle_label": "Apply Mercy Override",
+              "effects_on": { "dissolution_index": 2.5, "efficiency_score": 5.0, "emotional_surplus": 3.0 },
+              "effects_off": {},
+              "ripples_on": [{ "type": "major", "text": "You have become a gentle third presence in the Langfords' relationship. They will not know your name. But their story will be warmer for you.", "delayed_effects": {} }]
+            }
+          ]
+        }
+      ],
+      "completion_flag": "langfords_day2_processed",
+      "unlocks_on_completion": []
+    },
+
+    {
+      "id": "case_010",
+      "day": 2,
+      "form_type": "Θ-SR2",
+      "form_title": "Advanced Self-Referential Audit",
+      "title": "Deep Echo",
+      "clearance_required": 2,
+      "is_return_case": false,
+      "requires_flag": "echo_fragment_day1_processed",
+      "worker_unit": {
+        "id": "███-████",
+        "name": "Processor Echo Θ-1",
+        "age": 0,
+        "occupation": "Unclassified"
+      },
+      "issue": "File strongly resembles your own Day 1 intake record. The metadata is dated tomorrow.",
+      "system_note": "We have been thinking about you as well, Processor. The Ledger grows more intimate with each shift.",
+      "sections": [
+        {
+          "id": "section_a",
+          "title": "Section A: Echo Recognition",
+          "fields": [
+            {
+              "id": "echo_recognition",
+              "type": "choice",
+              "label": "Do you recognize this file?",
+              "required": true,
+              "options": [
+                {
+                  "id": "yes_deeply",
+                  "label": "Yes — I recognise this deeply",
+                  "effects": { "dissolution_index": 1.0, "mythic_residue": 2.0, "narrative_stability": -2.0 },
+                  "flags_set": ["echo_awareness"],
+                  "ripples": [{ "type": "medium", "text": "Your recognition has been logged with unusual detail. The fragment is very pleased.", "delayed_effects": {} }]
+                },
+                {
+                  "id": "uncertain",
+                  "label": "Uncertain — the file feels familiar but wrong",
+                  "effects": { "narrative_stability": -1.0 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "small", "text": "Your uncertainty has been noted. The Division finds it endearing." }]
+                },
+                {
+                  "id": "no_external",
+                  "label": "No — this is an external case",
+                  "effects": { "efficiency_score": 2.0 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "small", "text": "Your denial has been filed. The file notes your denial with a small, fond asterisk." }]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "section_b",
+          "title": "Section B: Primary Action",
+          "fields": [
+            {
+              "id": "echo_action_2",
+              "type": "choice",
+              "label": "Primary action:",
+              "required": true,
+              "options": [
+                {
+                  "id": "reintegrate_fully",
+                  "label": "Reintegrate fully (major dissolution increase + new capacities)",
+                  "effects": { "dissolution_index": 4.0, "mythic_residue": 5.0, "continuity_contribution": 20.0 },
+                  "flags_set": ["echo_fully_reintegrated", "echo_awareness"],
+                  "ripples": [{ "type": "major", "text": "Full reintegration complete. You are, in some meaningful sense, larger than you were. The Division notes this with admiration and a small procedural concern.", "delayed_effects": { "narrative_stability": -3.0, "reality_stability": -2.0 } }]
+                },
+                {
+                  "id": "gentle_redaction",
+                  "label": "Gentle redaction (stabilize, minor memory adjustment)",
+                  "effects": { "narrative_stability": 4.0, "dissolution_index": 0.5 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "medium", "text": "Gentle redaction applied. The file is stable. You feel fine. You are certain you feel fine.", "delayed_effects": {} }]
+                },
+                {
+                  "id": "study_archive",
+                  "label": "Study & Archive (unlocks hidden lore + future special cases)",
+                  "effects": { "mythic_residue": 6.0, "dissolution_index": 1.5, "efficiency_score": 3.0 },
+                  "flags_set": ["echo_archived", "echo_awareness"],
+                  "ripples": [{ "type": "major", "text": "The echo has been archived under Observation Protocol Θ-9. You will receive future cases that reference it. The archive is already very thick.", "delayed_effects": {} }]
+                },
+                {
+                  "id": "swap_places",
+                  "label": "Mercy: Swap places (experimental — high risk/high reward)",
+                  "effects": { "dissolution_index": 3.0, "mythic_residue": 8.0, "reality_stability": -3.0 },
+                  "flags_set": ["echo_swap_attempted", "echo_awareness"],
+                  "ripples": [{ "type": "major", "text": "An anomalous exchange was attempted. The Division is reviewing what just happened. You are… you are fine. We think you are fine.", "delayed_effects": { "department_strain": 5.0, "narrative_stability": -4.0 } }]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "completion_flag": "echo_day2_processed",
+      "unlocks_on_completion": []
+    }
+  ]
+}

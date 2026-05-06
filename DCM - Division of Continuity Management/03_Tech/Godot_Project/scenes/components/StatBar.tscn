@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcmstatbar001"]
+
+[ext_resource type="Script" path="res://scripts/ui/StatBar.gd" id="1_sb01"]
+
+[node name="StatBar" type="HBoxContainer"]
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+script = ExtResource("1_sb01")
+
+[node name="StatLabel" type="Label" parent="."]
+layout_mode = 2
+custom_minimum_size = Vector2(120, 0)
+text = "Stat Name"
+add_theme_color_override("font_color", Color(0.6, 0.6, 0.6, 1.0))
+add_theme_font_sizes_override("font_size", 11)
+
+[node name="StatProgress" type="ProgressBar" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 16)
+min_value = 0.0
+max_value = 100.0
+value = 50.0
+show_percentage = false
+
+[node name="StatValue" type="Label" parent="."]
+layout_mode = 2
+custom_minimum_size = Vector2(40, 0)
+text = "50.0"
+horizontal_alignment = 2
+add_theme_color_override("font_color", Color(1.0, 0.69, 0.0, 1.0))
+add_theme_font_sizes_override("font_size", 11)

@@ -1,1 +1,323 @@
-{}
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ContinuityState",
+  "description": "Canonical state schema for the Division of Continuity Management. All variables defined here map directly to the ContinuityState GDScript singleton.",
+  "version": "1.0.0",
+
+  "player_state": {
+    "description": "Persists across days. Saved on every case completion and every day end.",
+    "variables": {
+      "dissolution_index": {
+        "type": "float",
+        "range": [0.0, 100.0],
+        "default": 4.2,
+        "description": "How much of the Processor's identity has been successfully filed into the system. Primary progression meter. Higher = more assimilated.",
+        "thresholds": {
+          "30.0": "Subtle geometry increase in UI. Background patterns become more prominent.",
+          "50.0": "Player portrait begins shifting. System voice grows more intimate.",
+          "70.0": "Self-referential cases start appearing in queue. Text occasionally rewrites itself.",
+          "90.0": "Full assimilation path locked in. Reality bleeds into the forms."
+        }
+      },
+      "efficiency_score": {
+        "type": "float",
+        "range": [0.0, 100.0],
+        "default": 65.0,
+        "description": "How well the Processor serves the Division. Determines case quality outcomes and performance evaluations."
+      },
+      "continuity_contribution": {
+        "type": "float",
+        "range": [0.0, 1000.0],
+        "default": 0.0,
+        "description": "Cumulative measurable impact on reality stability. Rises with every case completion."
+      },
+      "clearance_level": {
+        "type": "int",
+        "range": [1, 9],
+        "default": 1,
+        "description": "Unlocks deeper form fields, more dangerous case types, and self-editing options. Increases at day transitions.",
+        "level_gates": {
+          "1": "Standard form fields. Basic case types.",
+          "2": "Symbol insertion field unlocked. Return cases visible. Mercy Override available.",
+          "3": "Self-surgery on Player File. Advanced self-referential audits. Dream Intervention.",
+          "4": "Cross-day ripple editing. Echo case variants.",
+          "5": "Temporal forms. Archive of Unraveling Cases access."
+        }
+      },
+      "mythic_residue": {
+        "type": "float",
+        "range": [0.0, 100.0],
+        "default": 12.0,
+        "description": "Archetypal weight the Processor still carries. High values push toward Mythic Ascension or Anomaly status."
+      },
+      "narrative_stability": {
+        "type": "float",
+        "range": [0.0, 100.0],
+        "default": 78.0,
+        "description": "How coherent the Processor's personal story remains. Dropping below 40 risks Unraveling events."
+      },
+      "emotional_surplus": {
+        "type": "float",
+        "range": [-100.0, 100.0],
+        "default": 8.0,
+        "description": "Unprocessed feelings leaking from the Processor's own file. Negative = deficit. Positive = surplus. Extreme values in either direction cause instability."
+      }
+    },
+    "flags": {
+      "description": "Boolean event flags. Once set, most are permanent. Drive branching and ending paths.",
+      "case_flags": [
+        "marcus_hobby_classified",
+        "marcus_hobby_converted",
+        "marcus_hobby_liquidated",
+        "marcus_sacred_geometry",
+        "marcus_elevated",
+        "marcus_mythic",
+        "elena_grief_rerouted",
+        "elena_memories_redacted",
+        "elena_rage_volatile",
+        "theo_childhood_compressed",
+        "theo_shamanic_flagged",
+        "theo_partial_restoration",
+        "arlen_family_compressed",
+        "arlen_wonder_preserved",
+        "liora_visionary",
+        "liora_sacred_visionary",
+        "liora_dangerous_vector",
+        "painted_echo",
+        "self_as_division_icon",
+        "self_inserted_dreams",
+        "ancestral_processor",
+        "junior_doubt_encouraged",
+        "burden_carried",
+        "echo_awareness",
+        "echo_elevated",
+        "echo_archived",
+        "echo_fully_reintegrated",
+        "echo_swap_attempted",
+        "mercy_override_used",
+        "future_accepted",
+        "future_edited",
+        "future_rejected",
+        "merged_echo"
+      ],
+      "meta_flags": [
+        "new_game_plus",
+        "true_ending_unlocked",
+        "co_creator_path_eligible"
+      ]
+    },
+    "thematic_tracks": {
+      "grief_handling_style": {
+        "type": "enum",
+        "values": ["", "Commercialized", "Repressed", "Preserved", "Weaponized"],
+        "default": "",
+        "description": "Dominant pattern in how the Processor handles grief cases."
+      },
+      "childhood_policy": {
+        "type": "enum",
+        "values": ["", "Fully_Compressed", "Selectively_Preserved", "Wild"],
+        "default": "",
+        "description": "Dominant policy toward childhood memory cases."
+      },
+      "narrative_control": {
+        "type": "enum",
+        "values": ["", "Strict", "Balanced", "Permissive"],
+        "default": "",
+        "description": "How tightly the Processor enforces approved narratives."
+      },
+      "self_treatment": {
+        "type": "enum",
+        "values": ["", "Optimizing", "Protective", "Sabotaging"],
+        "default": "",
+        "description": "How the Processor relates to their own dissolving file."
+      },
+      "echo_interactions": {
+        "type": "int",
+        "range": [0, 999],
+        "default": 0,
+        "description": "Count of meaningful interactions with Echo Fragment cases."
+      }
+    },
+    "derived": {
+      "player_portrait_stage": {
+        "type": "int",
+        "range": [0, 5],
+        "description": "Visual stage of portrait evolution. Calculated from dissolution_index. Stage 0 = human. Stage 5 = pure geometric sigil.",
+        "formula": "floor(dissolution_index / 20)"
+      },
+      "unraveling_risk": {
+        "type": "float",
+        "range": [0.0, 100.0],
+        "description": "Composite risk of a major unraveling event. Calculated from dissolution, department_strain, unraveling_events, and reality_stability."
+      }
+    }
+  },
+
+  "world_state": {
+    "description": "Global variables representing the health and mood of consensus reality. Affected by case decisions, ripple resolution, and player path.",
+    "variables": {
+      "reality_stability": {
+        "type": "float",
+        "range": [0.0, 100.0],
+        "default": 92.0,
+        "description": "Overall health of consensus reality. Below 40 triggers mass unraveling events."
+      },
+      "department_strain": {
+        "type": "float",
+        "range": [0.0, 100.0],
+        "default": 15.0,
+        "description": "How overloaded the Division is. High strain triggers difficult or contradictory cases."
+      },
+      "unraveling_events": {
+        "type": "int",
+        "range": [0, 999],
+        "default": 0,
+        "description": "Cumulative count of major anomalies triggered. Feeds unraveling_risk and System Fracture ending."
+      },
+      "mythic_commodities_index": {
+        "type": "float",
+        "range": [0.0, 200.0],
+        "default": 100.0,
+        "description": "Supply of usable archetypes in circulation. Below 50 creates scarcity events. Above 150 risks archetype overflow."
+      },
+      "collective_nostalgia": {
+        "type": "float",
+        "range": [0.0, 100.0],
+        "default": 45.0,
+        "description": "Cultural mood variable. Affects tone of greeting messages and available case types."
+      },
+      "era": {
+        "type": "enum",
+        "values": ["Act1", "Act2", "Act3"],
+        "default": "Act1",
+        "description": "Current story act. Determines available case pool and world-state flavor text."
+      }
+    }
+  },
+
+  "session_state": {
+    "description": "Transient variables tracking the current working day. Partially carries over between days.",
+    "variables": {
+      "current_day": {
+        "type": "int",
+        "default": 1,
+        "description": "Current day number. Drives case pool selection and clearance level updates."
+      },
+      "daily_cases_processed": {
+        "type": "int",
+        "default": 0,
+        "description": "Cases completed in the current shift."
+      },
+      "daily_efficiency": {
+        "type": "float",
+        "default": 0.0,
+        "description": "Temporary efficiency accumulator for today's performance review."
+      },
+      "active_case_id": {
+        "type": "string",
+        "default": "",
+        "description": "ID of the currently open case form. Empty string when none active."
+      },
+      "pending_ripples": {
+        "type": "array",
+        "default": [],
+        "description": "Queue of ripple effects to be resolved at end-of-day. Each entry is a ripple dict with type, text, and delayed_effects."
+      },
+      "completed_cases": {
+        "type": "array",
+        "default": [],
+        "description": "List of case IDs completed across all days. Used to prevent re-queuing and enable return cases."
+      }
+    }
+  },
+
+  "ripple_system": {
+    "description": "Ripple effects are queued during case processing and resolved at end-of-day.",
+    "ripple_schema": {
+      "type": {
+        "values": ["small", "medium", "major"],
+        "description": "small = flavor text only. medium = flavor text + variable modification. major = triggers special events or ending branch shifts."
+      },
+      "text": "string — narrative description of the ripple effect shown on End-of-Day screen.",
+      "delayed_effects": "Dictionary — stat modifications applied when this ripple resolves.",
+      "unlocks_case": "optional string — case ID unlocked by this ripple.",
+      "ending_flag": "optional string — flag contributing to an ending path."
+    }
+  },
+
+  "save_system": {
+    "save_slot_primary": "user://continuity_save.json",
+    "save_slot_ng_plus": "user://continuity_save_ng.json",
+    "auto_save_triggers": ["case_completion", "day_end"],
+    "ng_plus_carries": [
+      "dissolution_index",
+      "selected_major_flags",
+      "clearance_level_bonus",
+      "echo_memories"
+    ]
+  },
+
+  "ending_conditions": {
+    "description": "Evaluated at final case completion or explicit game-over state.",
+    "endings": {
+      "optimal_assimilation": {
+        "requirements": {
+          "dissolution_index_min": 75.0,
+          "efficiency_score_min": 85.0,
+          "mythic_residue_max": 40.0
+        }
+      },
+      "quiet_rebellion": {
+        "requirements": {
+          "dissolution_index_range": [40.0, 65.0],
+          "efficiency_score_max": 55.0,
+          "emotional_surplus_min": 30.0,
+          "self_treatment": "Protective"
+        }
+      },
+      "system_fracture": {
+        "requirements": {
+          "department_strain_min": 70.0,
+          "unraveling_events_min": 5,
+          "contradictory_flags_min": 4
+        }
+      },
+      "mythic_ascension": {
+        "requirements": {
+          "mythic_residue_min": 70.0,
+          "dissolution_index_min": 40.0
+        }
+      },
+      "echo_loop": {
+        "requirements": {
+          "echo_interactions_min": 4,
+          "echo_awareness": true
+        }
+      },
+      "merciful_erasure": {
+        "requirements": {
+          "emotional_surplus_spent_min": 60.0,
+          "self_treatment": "Protective",
+          "mercy_override_used": true
+        }
+      },
+      "the_unraveling": {
+        "requirements": {
+          "efficiency_score_max": 25.0,
+          "reality_stability_max": 30.0,
+          "unraveling_events_min": 3
+        }
+      },
+      "co_creator": {
+        "requirements": {
+          "new_game_plus": true,
+          "dissolution_index_range": [45.0, 70.0],
+          "efficiency_score_range": [55.0, 80.0],
+          "mythic_residue_range": [40.0, 65.0],
+          "co_creator_path_eligible": true
+        }
+      }
+    }
+  }
+}
+

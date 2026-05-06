@@ -1,0 +1,113 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcmending00001"]
+
+[ext_resource type="Script" path="res://scripts/scenes/EndingScreen.gd" id="1_end01"]
+
+[node name="EndingScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_end01")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.039, 0.039, 0.059, 1.0)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 200.0
+offset_right = -200.0
+offset_top = 40.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 24
+
+[node name="EndingTitle" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "FINAL CLASSIFICATION"
+horizontal_alignment = 1
+add_theme_color_override("font_color", Color(1.0, 0.69, 0.0, 1.0))
+theme_override_font_sizes/font_size = 24
+
+[node name="TitleSep" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PortraitFinal" type="ColorRect" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(200, 200)
+size_flags_horizontal = 4
+color = Color(0.5, 0.5, 0.5, 1.0)
+
+[node name="DescSep" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="EndingDescription" type="RichTextLabel" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = ""
+fit_content = true
+autowrap_mode = 3
+
+[node name="VoiceSep" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SystemVoice" type="RichTextLabel" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = ""
+fit_content = true
+autowrap_mode = 3
+add_theme_font_sizes_override("normal_font_size", 16)
+
+[node name="PostCreditsSep" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PostCredits" type="RichTextLabel" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = ""
+fit_content = true
+autowrap_mode = 3
+add_theme_color_override("default_color", Color(0.6, 0.6, 0.6, 1.0))
+
+[node name="ButtonContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ButtonSpacer" type="Control" parent="ScrollContainer/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NewGamePlusButton" type="Button" parent="ScrollContainer/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+text = "NEW GAME+ →"
+visible = false
+
+[node name="MainMenuButton" type="Button" parent="ScrollContainer/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+text = "RETURN TO BEGINNING"
+
+[node name="CRTOverlay" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+mouse_filter = 2

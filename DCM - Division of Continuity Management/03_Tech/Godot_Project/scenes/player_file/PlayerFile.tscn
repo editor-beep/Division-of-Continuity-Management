@@ -1,0 +1,166 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcmplayer00001"]
+
+[ext_resource type="Script" path="res://scripts/scenes/PlayerFile.gd" id="1_pf01"]
+
+[node name="PlayerFile" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pf01")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.039, 0.039, 0.059, 1.0)
+
+[node name="TopBar" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_bottom = 48.0
+grow_vertical = 2
+
+[node name="TopBarInner" type="HBoxContainer" parent="TopBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FileTitle" type="Label" parent="TopBar/TopBarInner"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "— PERSONAL CONTINUITY FILE — RESTRICTED ACCESS —"
+horizontal_alignment = 1
+add_theme_color_override("font_color", Color(1.0, 0.69, 0.0, 1.0))
+
+[node name="FileBody" type="HSplitContainer" parent="."]
+layout_mode = 1
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 48.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PortraitPanel" type="Panel" parent="FileBody"]
+layout_mode = 2
+custom_minimum_size = Vector2(240, 0)
+
+[node name="PortraitVBox" type="VBoxContainer" parent="FileBody/PortraitPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="FileHeader" type="Label" parent="FileBody/PortraitPanel/PortraitVBox"]
+layout_mode = 2
+text = "CONTINUITY FILE\nPROCESSOR Θ-1"
+add_theme_color_override("font_color", Color(1.0, 0.69, 0.0, 1.0))
+autowrap_mode = 3
+
+[node name="PortraitSep" type="HSeparator" parent="FileBody/PortraitPanel/PortraitVBox"]
+layout_mode = 2
+
+[node name="PortraitContainer" type="ColorRect" parent="FileBody/PortraitPanel/PortraitVBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 220)
+size_flags_vertical = 0
+color = Color(0.35, 0.3, 0.28, 1.0)
+
+[node name="PortraitStageLabel" type="Label" parent="FileBody/PortraitPanel/PortraitVBox"]
+layout_mode = 2
+text = ""
+add_theme_color_override("font_color", Color(0.549, 0.306, 1.0, 1.0))
+autowrap_mode = 3
+add_theme_font_sizes_override("font_size", 11)
+
+[node name="DataPanel" type="Panel" parent="FileBody"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DataScroll" type="ScrollContainer" parent="FileBody/DataPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DataVBox" type="VBoxContainer" parent="FileBody/DataPanel/DataScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="StatusLabel" type="Label" parent="FileBody/DataPanel/DataScroll/DataVBox"]
+layout_mode = 2
+text = "STATUS: UNDER ACTIVE MAINTENANCE"
+add_theme_color_override("font_color", Color(0.0, 0.722, 0.690, 1.0))
+
+[node name="MetricsSep1" type="HSeparator" parent="FileBody/DataPanel/DataScroll/DataVBox"]
+layout_mode = 2
+
+[node name="MetricsGrid" type="GridContainer" parent="FileBody/DataPanel/DataScroll/DataVBox"]
+layout_mode = 2
+columns = 2
+
+[node name="MetricsSep2" type="HSeparator" parent="FileBody/DataPanel/DataScroll/DataVBox"]
+layout_mode = 2
+
+[node name="MemorySection" type="VBoxContainer" parent="FileBody/DataPanel/DataScroll/DataVBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="MemorySep" type="HSeparator" parent="FileBody/DataPanel/DataScroll/DataVBox"]
+layout_mode = 2
+
+[node name="ObservationsSection" type="VBoxContainer" parent="FileBody/DataPanel/DataScroll/DataVBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="ObservationsTitle" type="Label" parent="FileBody/DataPanel/DataScroll/DataVBox/ObservationsSection"]
+layout_mode = 2
+text = "System Observations:"
+add_theme_color_override("font_color", Color(1.0, 0.69, 0.0, 1.0))
+
+[node name="ObservationsText" type="RichTextLabel" parent="FileBody/DataPanel/DataScroll/DataVBox/ObservationsSection"]
+layout_mode = 2
+bbcode_enabled = true
+text = ""
+fit_content = true
+
+[node name="CloseButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -48.0
+offset_right = -12.0
+offset_bottom = -8.0
+grow_vertical = 0
+text = "← RETURN TO TERMINAL"
+
+[node name="CRTOverlay" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+mouse_filter = 2

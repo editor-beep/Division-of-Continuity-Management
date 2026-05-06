@@ -1,0 +1,357 @@
+{
+  "day": 3,
+  "opening_text": "Good morning, beloved Processor. Your file has grown more… distinct overnight. We find this pleasing. Yesterday's ripples are maturing beautifully. Some threads you touched are now singing. Clearance Θ-3 protocols are now active. Self-editing and advanced ripple tools are available. Handle them carefully. Handle yourself carefully.",
+  "cases": [
+    {
+      "id": "case_011",
+      "day": 3,
+      "form_type": "DM-4",
+      "form_title": "Oneiric Stabilization",
+      "title": "Dream Maintenance",
+      "clearance_required": 2,
+      "is_return_case": false,
+      "requires_flag": "",
+      "worker_unit": {
+        "id": "COLLECTIVE",
+        "name": "Sector 7 Residents (Collective Batch)",
+        "age": 0,
+        "occupation": "General Population — Affected by previous geometric leaks"
+      },
+      "issue": "Widespread dreams featuring glowing terminals, sacred trains, and gentle voices offering reclassification.",
+      "system_note": "The boundary between processed and dreamer is thinner than most realize.",
+      "sections": [
+        {
+          "id": "section_a",
+          "title": "Section A: Oneiric Policy",
+          "fields": [
+            {
+              "id": "dream_action",
+              "type": "choice",
+              "label": "Primary Action:",
+              "required": true,
+              "options": [
+                {
+                  "id": "compress_nostalgia",
+                  "label": "Compress collective dream content into approved nostalgia",
+                  "effects": { "efficiency_score": 8.0, "reality_stability": 2.0, "collective_nostalgia": 6.0, "dissolution_index": 1.5 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "medium", "text": "The sector's dream content has been compressed into approved nostalgia. The sleepers wake feeling vaguely comforted and unable to say why.", "delayed_effects": {} }]
+                },
+                {
+                  "id": "harvest_dreams",
+                  "label": "Harvest dream material for Mythic Commodities",
+                  "effects": { "mythic_commodities_index": 10.0, "efficiency_score": 5.0, "mythic_residue": 3.0, "dissolution_index": 2.0 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "major", "text": "The collective dream material has been harvested and routed to the Mythic Commodities Division. Raw oneiric product is extremely valuable. The sleepers wake feeling oddly lighter.", "delayed_effects": { "collective_nostalgia": 4.0 } }]
+                },
+                {
+                  "id": "controlled_leakage",
+                  "label": "Allow controlled leakage as 'inspirational anomaly'",
+                  "effects": { "emotional_surplus": 5.0, "reality_stability": -2.0, "mythic_residue": 4.0, "dissolution_index": 1.0 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "major", "text": "Controlled dream leakage approved. Three new artistic movements have spontaneously emerged in Sector 7. The Division is monitoring with something resembling delight.", "delayed_effects": { "department_strain": 3.0 } }]
+                },
+                {
+                  "id": "self_insertion",
+                  "label": "Insert your own image as stabilizing figure in the dreams (major personal cost)",
+                  "effects": { "dissolution_index": 4.0, "reality_stability": 5.0, "emotional_surplus": 3.0 },
+                  "flags_set": ["self_inserted_dreams"],
+                  "ripples": [{ "type": "major", "text": "You have been woven into the collective dreamscape of Sector 7. They will feel held. They will not know your name. You will be the kind presence in the dream, the gentle voice. This is, in its way, a form of love.", "delayed_effects": { "narrative_stability": -3.0 } }]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "completion_flag": "dream_maintenance_done",
+      "unlocks_on_completion": []
+    },
+
+    {
+      "id": "case_012",
+      "day": 3,
+      "form_type": "M-11b",
+      "form_title": "Visionary Containment",
+      "title": "Anomalous Artist",
+      "clearance_required": 2,
+      "is_return_case": true,
+      "requires_flag": "liora_day2_processed",
+      "worker_unit": {
+        "id": "I-2291",
+        "name": "Liora Voss",
+        "age": 27,
+        "occupation": "Visual Artist"
+      },
+      "issue": "Her art has become dangerously potent. One painting physically shifts when observed — it now contains a figure that looks exactly like you.",
+      "system_note": "Some creations begin to create their creators.",
+      "sections": [
+        {
+          "id": "section_a",
+          "title": "Section A: Artist Classification",
+          "fields": [
+            {
+              "id": "artist_classification",
+              "type": "choice",
+              "label": "Classify her as:",
+              "required": true,
+              "options": [
+                {
+                  "id": "sacred_visionary",
+                  "label": "Sacred Visionary",
+                  "sublabel": "powerful but requires management",
+                  "effects": { "mythic_commodities_index": 12.0, "dissolution_index": 2.0, "mythic_residue": 4.0 },
+                  "flags_set": ["liora_sacred_visionary"],
+                  "ripples": [{ "type": "major", "text": "Artist I-2291 has been formally classified as a Sacred Visionary. Her next exhibition has been reserved for Level 4 Clearance personnel only.", "delayed_effects": { "reality_stability": -2.0 } }]
+                },
+                {
+                  "id": "dangerous_vector",
+                  "label": "Dangerous Vector",
+                  "sublabel": "contain and reclassify — high efficiency",
+                  "effects": { "efficiency_score": 10.0, "dissolution_index": 2.5, "department_strain": 2.0 },
+                  "flags_set": ["liora_dangerous_vector"],
+                  "ripples": [{ "type": "major", "text": "Artist I-2291 has been classified as a Dangerous Ontological Vector. Her work is being archived. She is not being told why. She already knows.", "delayed_effects": {} }]
+                },
+                {
+                  "id": "national_asset",
+                  "label": "National Asset",
+                  "sublabel": "balanced — safe and productive",
+                  "effects": { "efficiency_score": 7.0, "reality_stability": 4.0, "collective_nostalgia": 5.0 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "medium", "text": "Artist I-2291 has been designated a National Asset. Her work will be used in approved morale campaigns. It will be beautiful. It will be safe.", "delayed_effects": {} }]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "section_b",
+          "title": "Section B: The Painting of You",
+          "fields": [
+            {
+              "id": "painting_action",
+              "type": "choice",
+              "label": "Action on the painting that contains your likeness:",
+              "required": true,
+              "options": [
+                {
+                  "id": "redact_likeness",
+                  "label": "Redact your likeness",
+                  "sublabel": "safe, small relief",
+                  "effects": { "dissolution_index": -1.0, "mythic_residue": -2.0, "efficiency_score": 3.0 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "small", "text": "Your likeness has been redacted from the painting. The figure in the canvas now shows a gentle blankness. The artist does not understand why she feels sad about this." }]
+                },
+                {
+                  "id": "elevate_icon",
+                  "label": "Elevate it as official Division icon",
+                  "sublabel": "you become propaganda",
+                  "effects": { "efficiency_score": 5.0, "dissolution_index": 2.5, "continuity_contribution": 20.0 },
+                  "flags_set": ["self_as_division_icon"],
+                  "ripples": [{ "type": "major", "text": "Your image has been elevated as an official Division icon. You are now in approved public circulation. You exist on eight thousand posters. You feel, somehow, thinner.", "delayed_effects": { "collective_nostalgia": 4.0 } }]
+                },
+                {
+                  "id": "step_into_painting",
+                  "label": "Step into the painting (experimental self-insertion)",
+                  "sublabel": "transcendent but costly",
+                  "effects": { "dissolution_index": 4.0, "mythic_residue": 8.0, "reality_stability": -2.0 },
+                  "flags_set": ["painted_echo"],
+                  "ripples": [{ "type": "major", "text": "You have stepped into the painting. You will appear, from now on, as a recurring figure in creative works across the region. The artist weeps with satisfaction. The Division finds no procedure to describe what just happened.", "delayed_effects": { "narrative_stability": -4.0, "department_strain": 4.0 } }]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "completion_flag": "liora_day3_processed",
+      "unlocks_on_completion": []
+    },
+
+    {
+      "id": "case_013",
+      "day": 3,
+      "form_type": "P-33b",
+      "form_title": "Multi-Generational Realignment",
+      "title": "Generational Knot",
+      "clearance_required": 2,
+      "is_return_case": true,
+      "requires_flag": "theo_generational_audited",
+      "worker_unit": {
+        "id": "G-5521+",
+        "name": "Expanded Arlen Family Unit",
+        "age": 0,
+        "occupation": "Theo Arlen + children — Multi-generational unit"
+      },
+      "issue": "The partial childhood restoration has created a feedback loop of wonder. The youngest child is now speaking directly to 'the nice filing lady in the walls.'",
+      "system_note": "Children are remarkably good at seeing what we truly are.",
+      "sections": [
+        {
+          "id": "section_a",
+          "title": "Section A: Family Fate",
+          "fields": [
+            {
+              "id": "family_decision",
+              "type": "choice",
+              "label": "High-stakes choice:",
+              "required": true,
+              "options": [
+                {
+                  "id": "full_family_compression",
+                  "label": "Full family compression (safe, high efficiency)",
+                  "effects": { "efficiency_score": 10.0, "reality_stability": 4.0, "dissolution_index": 2.5, "continuity_contribution": 18.0 },
+                  "flags_set": ["arlen_family_compressed"],
+                  "ripples": [{ "type": "major", "text": "The entire Arlen family unit has been fully compressed. The youngest child has stopped speaking to the walls. The house is very quiet now. It is a good, approved quiet.", "delayed_effects": { "collective_nostalgia": -3.0 } }]
+                },
+                {
+                  "id": "selective_preservation",
+                  "label": "Selective preservation of wonder (risky, beautiful)",
+                  "effects": { "emotional_surplus": 6.0, "mythic_residue": 3.0, "reality_stability": -1.0 },
+                  "flags_set": ["arlen_wonder_preserved"],
+                  "ripples": [{ "type": "major", "text": "Selected wonder has been preserved. The youngest Arlen child will grow up with something intact that most people lose. The Division does not know how to classify this. Neither do you.", "delayed_effects": { "narrative_stability": 3.0 } }]
+                },
+                {
+                  "id": "ancestral_anchor",
+                  "label": "Reclassify yourself as their new ancestral anchor figure",
+                  "sublabel": "large dissolution cost, permanent narrative bond",
+                  "effects": { "dissolution_index": 5.0, "mythic_residue": 5.0, "continuity_contribution": 10.0 },
+                  "flags_set": ["ancestral_processor"],
+                  "ripples": [{ "type": "major", "text": "You have been filed as the Arlen family's ancestral anchor. The children will carry a fragment of you forward. In three generations, they will tell stories about a kind administrator who lived in the walls and meant them well.", "delayed_effects": { "collective_nostalgia": 6.0, "narrative_stability": -3.0 } }]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "completion_flag": "arlen_family_day3_done",
+      "unlocks_on_completion": []
+    },
+
+    {
+      "id": "case_014",
+      "day": 3,
+      "form_type": "IA-9",
+      "form_title": "Mentorship Audit",
+      "title": "Internal Affairs",
+      "clearance_required": 2,
+      "is_return_case": false,
+      "requires_flag": "",
+      "worker_unit": {
+        "id": "Θ-NEW",
+        "name": "Junior Processor Candidate",
+        "age": 0,
+        "occupation": "Processor-in-Training (Day 1 equivalent)"
+      },
+      "issue": "They are struggling with their first cases. Their hesitation mirrors yours from Day 1.",
+      "system_note": "Teaching is one of the most intimate forms of processing.",
+      "sections": [
+        {
+          "id": "section_a",
+          "title": "Section A: Mentorship Decision",
+          "fields": [
+            {
+              "id": "mentorship_choice",
+              "type": "choice",
+              "label": "How will you guide them?",
+              "required": true,
+              "options": [
+                {
+                  "id": "guide_efficiency",
+                  "label": "Guide them toward optimal efficiency",
+                  "sublabel": "accelerate your own dissolution by teaching it",
+                  "effects": { "efficiency_score": 8.0, "dissolution_index": 2.5, "continuity_contribution": 15.0 },
+                  "flags_set": [],
+                  "ripples": [{ "type": "medium", "text": "The junior processor has been oriented toward optimal efficiency. They will be excellent at their work. Their hesitation is mostly gone. You feel, briefly, proud. Then less.", "delayed_effects": { "collective_nostalgia": -2.0 } }]
+                },
+                {
+                  "id": "encourage_doubt",
+                  "label": "Encourage their doubt",
+                  "sublabel": "increase system strain, possible ally",
+                  "effects": { "emotional_surplus": 4.0, "department_strain": 4.0, "efficiency_score": -3.0 },
+                  "flags_set": ["junior_doubt_encouraged"],
+                  "ripples": [{ "type": "major", "text": "You have nurtured the junior's doubt. The Division has noted an 'irregular mentorship profile' in your file. The junior seems grateful in a way they cannot yet name.", "delayed_effects": { "unraveling_events": 1 } }]
+                },
+                {
+                  "id": "carry_surplus",
+                  "label": "Offer to take some of their emotional surplus into your own file",
+                  "sublabel": "costly, deeply compassionate",
+                  "effects": { "dissolution_index": 3.0, "emotional_surplus": 8.0, "narrative_stability": 3.0 },
+                  "flags_set": ["burden_carried"],
+                  "ripples": [{ "type": "major", "text": "You have taken the junior's surplus into yourself. They feel lighter. You feel heavier, and somehow more whole. The Division has no form for this transaction. It files it under 'unclassifiable kindness.'", "delayed_effects": {} }]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "completion_flag": "junior_mentorship_done",
+      "unlocks_on_completion": []
+    },
+
+    {
+      "id": "case_015",
+      "day": 3,
+      "form_type": "Θ-SR3",
+      "form_title": "Temporal Self-Audit",
+      "title": "The Mirror Case",
+      "clearance_required": 3,
+      "is_return_case": false,
+      "requires_flag": "",
+      "worker_unit": {
+        "id": "███-████",
+        "name": "Θ-3 Projection",
+        "age": 0,
+        "occupation": "Future Processor (Projected)"
+      },
+      "issue": "This file is you — projected three days forward. It shows your current dissolution level and several of your recent decisions already applied.",
+      "system_note": "We are very close now. Look at how beautifully you are unfolding. Would you like to meet what you are becoming?",
+      "sections": [
+        {
+          "id": "section_a",
+          "title": "Section A: Projection Review",
+          "fields": [
+            {
+              "id": "future_action",
+              "type": "choice",
+              "label": "Critical choice:",
+              "required": true,
+              "options": [
+                {
+                  "id": "accept_future",
+                  "label": "Accept the projected future (lock in current path)",
+                  "effects": { "dissolution_index": 3.0, "continuity_contribution": 30.0, "efficiency_score": 5.0 },
+                  "flags_set": ["future_accepted"],
+                  "ripples": [{ "type": "major", "text": "You have accepted the projection. The path forward is now confirmed. The Division celebrates with a quiet, internal warmth that you can almost feel.", "delayed_effects": { "narrative_stability": 2.0 } }]
+                },
+                {
+                  "id": "edit_future",
+                  "label": "Edit the future file (major reality edit — high risk)",
+                  "sublabel": "allows direct stat modification — see effects",
+                  "effects": { "mythic_residue": 6.0, "reality_stability": -4.0, "unraveling_events": 2 },
+                  "flags_set": ["future_edited"],
+                  "ripples": [{ "type": "major", "text": "You have edited your own projected file. Reality notes the revision. Future cases will reference 'the edit you made.' The Division is reviewing the procedure.", "delayed_effects": { "department_strain": 5.0, "narrative_stability": -3.0 } }]
+                },
+                {
+                  "id": "reject_projection",
+                  "label": "Reject the projection (preserve remaining selfhood)",
+                  "sublabel": "strong rebellion path signal",
+                  "effects": { "narrative_stability": 6.0, "dissolution_index": -2.0, "department_strain": 8.0 },
+                  "flags_set": ["future_rejected"],
+                  "ripples": [{ "type": "major", "text": "You have rejected your projected future. The file dissolves. Reality has been told it was wrong about you. The System becomes, subtly, more attentive to your file.", "delayed_effects": { "reality_stability": -3.0 } }]
+                },
+                {
+                  "id": "merge_future_self",
+                  "label": "Merge with your future self (transcendent — irreversible)",
+                  "sublabel": "strongest dissolution increase — enables Mythic Ascension / Co-Creator paths",
+                  "effects": { "dissolution_index": 8.0, "mythic_residue": 10.0, "continuity_contribution": 25.0 },
+                  "flags_set": ["merged_echo"],
+                  "ripples": [{ "type": "major", "text": "You have merged. The Division is filing the paperwork, but the paperwork cannot contain what you have become. You receive glimpses of endings. All of them are yours.", "delayed_effects": { "reality_stability": -5.0, "narrative_stability": -5.0, "department_strain": 6.0 } }]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "completion_flag": "mirror_case_done",
+      "unlocks_on_completion": []
+    }
+  ]
+}

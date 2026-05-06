@@ -1,0 +1,199 @@
+{
+  "version": "1.0",
+  "description": "Reusable form type definitions for the Division of Continuity Management. The game engine reads form_types to apply visual styling and default behaviours; individual cases still define all their own fields.",
+
+  "form_types": {
+    "R-19": {
+      "name": "Recreational Reallocation Request",
+      "clearance_required": 1,
+      "description": "For the assessment and reclassification of non-productive recreational activities and their symbolic value to the Continuum.",
+      "accent_color": "#FFB000",
+      "default_efficiency_weight": 1.0,
+      "default_dissolution_weight": 0.5,
+      "typical_sections": ["symbolic_valuation", "recommended_action"],
+      "notes": "Low-stakes entry point. Establishes tone of bureaucratic care over personal habits."
+    },
+    "R-19b": {
+      "name": "Ripple Reassessment",
+      "clearance_required": 1,
+      "description": "Follow-up form for reassessing the downstream effects of a previous R-19 filing.",
+      "accent_color": "#FFB000",
+      "default_efficiency_weight": 1.0,
+      "default_dissolution_weight": 0.7,
+      "typical_sections": ["status_assessment", "followup_action"],
+      "notes": "Return-case form. Always linked to a prior R-19 completion flag."
+    },
+    "G-7": {
+      "name": "Grief Commercialization Assessment",
+      "clearance_required": 1,
+      "description": "For the evaluation and routing of inherited or personal grief to productive channels. Grief is a resource. It must be filed correctly.",
+      "accent_color": "#00B8B0",
+      "default_efficiency_weight": 0.9,
+      "default_dissolution_weight": 0.7,
+      "typical_sections": ["grief_classification", "memory_taxonomy", "renarration"],
+      "notes": "High emotional weight. System Voice should feel warmer than standard. Handle memory reclassification with care."
+    },
+    "D-14": {
+      "name": "Developmental Compression Audit",
+      "clearance_required": 1,
+      "description": "For the review and reclassification of developmental anomalies, magical thinking residue, and pre-rational childhood experiences.",
+      "accent_color": "#8C4EFF",
+      "default_efficiency_weight": 1.1,
+      "default_dissolution_weight": 0.8,
+      "typical_sections": ["compression_decision", "taxonomy_alignment"],
+      "notes": "Triggers childhood_policy flag. Has generational ripple potential. Most emotionally confronting for players who reflect."
+    },
+    "DN-22": {
+      "name": "Dyadic Narrative Alignment",
+      "clearance_required": 1,
+      "description": "For the assessment and alignment of two-person relational narratives that have begun to diverge from approved continuity.",
+      "accent_color": "#FFB000",
+      "default_efficiency_weight": 0.8,
+      "default_dissolution_weight": 0.6,
+      "typical_sections": ["narrative_alignment", "identity_priority"],
+      "notes": "Introduces the question of whose story matters more. Priority weighting sets langford flags used in Day 2."
+    },
+    "DN-22b": {
+      "name": "Advanced Dyadic Maintenance",
+      "clearance_required": 1,
+      "description": "Return-case form for dyadic units showing post-alignment complications. Includes Mercy Override field at Clearance 2.",
+      "accent_color": "#FFB000",
+      "default_efficiency_weight": 0.8,
+      "default_dissolution_weight": 0.8,
+      "typical_sections": ["state_assessment", "mercy_override"],
+      "notes": "Mercy Override is the first instance where the player can directly insert themselves into another person's story. High dissolution cost."
+    },
+    "Θ-SR1": {
+      "name": "Self-Referential Audit — Level 1",
+      "clearance_required": 1,
+      "description": "For the processing of files that reference the Processor's own Continuity data. Clearance warning required.",
+      "accent_color": "#8C4EFF",
+      "default_efficiency_weight": 0.5,
+      "default_dissolution_weight": 1.5,
+      "typical_sections": ["recognition", "primary_action"],
+      "notes": "First introduction of the Echo mechanic. Sets echo_awareness flag. System Voice should be slightly warmer and more intimate than standard."
+    },
+    "Θ-SR2": {
+      "name": "Self-Referential Audit — Level 2",
+      "clearance_required": 2,
+      "description": "Advanced self-referential processing for files with metadata dated in the future. Level 2 required.",
+      "accent_color": "#8C4EFF",
+      "default_efficiency_weight": 0.4,
+      "default_dissolution_weight": 2.0,
+      "typical_sections": ["echo_recognition", "primary_action"],
+      "notes": "Day 2 climax case. All four options have major narrative consequences. Swap Places option is highest-risk available in the game at this point."
+    },
+    "Θ-SR3": {
+      "name": "Temporal Self-Audit — Level 3",
+      "clearance_required": 3,
+      "description": "For the processing of a temporally-displaced projection of the Processor's own file. Level 3 required. Please be seated.",
+      "accent_color": "#8C4EFF",
+      "default_efficiency_weight": 0.3,
+      "default_dissolution_weight": 3.0,
+      "typical_sections": ["projection_review"],
+      "notes": "Day 3 climax. Final major decision before ending calculation. The System Voice must be at its most intimate here."
+    },
+    "M-11": {
+      "name": "Mythic Commodities Harvesting",
+      "clearance_required": 1,
+      "description": "For the extraction, routing, and monetization of high-yield mythic surplus from creative practitioners.",
+      "accent_color": "#8C4EFF",
+      "default_efficiency_weight": 0.9,
+      "default_dissolution_weight": 0.8,
+      "typical_sections": ["despair_routing", "symbol_insertion"],
+      "notes": "Symbol insertion field only available at Clearance 2. The train/spiral/mandala options cross-reference other cases."
+    },
+    "M-11b": {
+      "name": "Visionary Containment",
+      "clearance_required": 2,
+      "description": "Return-case form for creative practitioners who have escalated beyond standard mythic commodity management.",
+      "accent_color": "#8C4EFF",
+      "default_efficiency_weight": 0.7,
+      "default_dissolution_weight": 1.2,
+      "typical_sections": ["artist_classification", "painting_action"],
+      "notes": "The painting_action section is unique to Day 3. Step Into Painting triggers the painted_echo flag and has major cosmological implications."
+    },
+    "P-33": {
+      "name": "Generational Thread Alignment",
+      "clearance_required": 1,
+      "description": "For the assessment and realignment of intergenerational narrative threads, particularly where childhood reclassification has produced offspring-level instability.",
+      "accent_color": "#00B8B0",
+      "default_efficiency_weight": 1.0,
+      "default_dissolution_weight": 0.9,
+      "typical_sections": ["generational_policy", "children_taxonomy"],
+      "notes": "Sets theo_partial_restoration flag if mercy option chosen. This flag is checked in EndingEvaluator for the quiet_rebellion path."
+    },
+    "P-33b": {
+      "name": "Multi-Generational Realignment",
+      "clearance_required": 2,
+      "description": "Expanded generational processing for family units exhibiting recursive wonder feedback loops.",
+      "accent_color": "#00B8B0",
+      "default_efficiency_weight": 0.9,
+      "default_dissolution_weight": 1.1,
+      "typical_sections": ["family_fate"],
+      "notes": "ancestral_processor flag is among the strongest narrative-bond flags in the game. Creates persistent cross-case references."
+    },
+    "DM-4": {
+      "name": "Oneiric Stabilization",
+      "clearance_required": 2,
+      "description": "For the processing and stabilization of collective dream content in affected population sectors.",
+      "accent_color": "#8C4EFF",
+      "default_efficiency_weight": 0.8,
+      "default_dissolution_weight": 1.0,
+      "typical_sections": ["oneiric_policy"],
+      "notes": "Self-insertion option is the most dissolution-costly single action available before Day 3 finale cases. Sets self_inserted_dreams flag."
+    },
+    "IA-9": {
+      "name": "Mentorship Audit",
+      "clearance_required": 2,
+      "description": "For the formal evaluation of inter-processor mentorship engagements and their systemic effects.",
+      "accent_color": "#FFB000",
+      "default_efficiency_weight": 0.9,
+      "default_dissolution_weight": 1.0,
+      "typical_sections": ["mentorship_decision"],
+      "notes": "burden_carried flag used in EndingEvaluator for merciful_erasure path. The junior_doubt_encouraged flag is checked for system_fracture path."
+    }
+  },
+
+  "field_types": {
+    "choice": {
+      "description": "Select one option from a set of classified alternatives. Each option carries effects and ripples.",
+      "ui_component": "OptionGroup",
+      "required_by_default": true,
+      "rendering_notes": "Display as mutually-exclusive button group. Selected option highlighted in amber. Sublabel rendered in smaller grey text below main label."
+    },
+    "slider": {
+      "description": "Calibrate a continuous value within an approved range. Interpolates between min and max effects.",
+      "ui_component": "HSlider",
+      "required_by_default": false,
+      "rendering_notes": "Displays current numeric value to the right. Default value pulled from 'default' field. effects_at_min and effects_at_max are linearly interpolated."
+    },
+    "text": {
+      "description": "Provide a written reclassification, re-narration, or symbol insertion. Freeform field.",
+      "ui_component": "TextEdit",
+      "required_by_default": false,
+      "rendering_notes": "Multi-line text area. Placeholder text from 'placeholder' field. No mechanical effect unless effects_if_filled is defined."
+    },
+    "toggle": {
+      "description": "Binary approval or override. On/off with separate effect sets.",
+      "ui_component": "CheckButton",
+      "required_by_default": false,
+      "rendering_notes": "Toggle button. effects_on applied when true, effects_off when false. ripples_on queued when toggled on."
+    }
+  },
+
+  "effect_keys": {
+    "dissolution_index":       { "range": [0, 100], "description": "Player's personal dissolution. Primary axis of transformation." },
+    "efficiency_score":        { "range": [0, 100], "description": "Player's daily processing efficiency. Required above 60 for promotion." },
+    "continuity_contribution": { "range": [0, 1000], "description": "MEV accumulated for the Division. Higher = more promotable." },
+    "clearance_level":         { "range": [1, 5], "description": "Access tier. Increases unlock form fields and case types." },
+    "mythic_residue":          { "range": [0, 100], "description": "Accumulated archetypal weight. Drives Mythic Ascension ending." },
+    "narrative_stability":     { "range": [0, 100], "description": "Coherence of the player's personal story. Below 30 causes visual glitch FX." },
+    "emotional_surplus":       { "range": [-100, 100], "description": "Excess/deficit of processed emotion. Drives quiet_rebellion and merciful_erasure paths." },
+    "reality_stability":       { "range": [0, 100], "description": "World state. Below 15 triggers the_unraveling ending override." },
+    "department_strain":       { "range": [0, 100], "description": "Institutional stress. High strain → system_fracture." },
+    "unraveling_events":       { "range": [0, 20], "description": "Count of major destabilizing events. Contributes to the_unraveling check." },
+    "mythic_commodities_index":{ "range": [0, 200], "description": "Economic index of mythic output. Drives market scenes and certain ripple texts." },
+    "collective_nostalgia":    { "range": [0, 100], "description": "Sector-level nostalgia saturation. High values make certain cases more palatable." }
+  }
+}
