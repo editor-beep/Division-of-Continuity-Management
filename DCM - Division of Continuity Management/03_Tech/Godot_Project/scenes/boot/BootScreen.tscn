@@ -1,0 +1,90 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcmboots00001"]
+
+[ext_resource type="Script" path="res://scripts/scenes/BootScreen.gd" id="1_boot01"]
+
+[node name="BootScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_boot01")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.039, 0.039, 0.059, 1)
+
+[node name="GeometryBackground" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="SealContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.1
+anchor_right = 0.5
+anchor_bottom = 0.1
+offset_left = -64.0
+offset_top = 0.0
+offset_right = 64.0
+offset_bottom = 128.0
+
+[node name="SealRect" type="ColorRect" parent="SealContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1.0, 0.69, 0.0, 0.8)
+
+[node name="ContentContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -250.0
+offset_right = 400.0
+offset_bottom = 250.0
+theme_override_constants/separation = 16
+
+[node name="BootText" type="RichTextLabel" parent="ContentContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 400)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = ""
+add_theme_font_size_override("normal_font_size", 14)
+
+[node name="PromptLabel" type="Label" parent="ContentContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "[Press ENTER or click to begin your shift]"
+horizontal_alignment = 1
+add_theme_color_override("font_color", Color(1.0, 0.69, 0.0, 1.0))
+
+[node name="CRTOverlay" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+mouse_filter = 2

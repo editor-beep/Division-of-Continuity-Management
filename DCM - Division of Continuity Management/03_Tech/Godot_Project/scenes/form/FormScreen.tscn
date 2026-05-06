@@ -1,0 +1,246 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcmforms00001"]
+
+[ext_resource type="Script" path="res://scripts/scenes/FormScreen.gd" id="1_form01"]
+
+[node name="FormScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_form01")
+
+[node name="GeometryBackground" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+mouse_filter = 2
+
+[node name="TopBar" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_bottom = 48.0
+grow_vertical = 2
+
+[node name="TopBarLayout" type="HBoxContainer" parent="TopBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="SealSmall" type="ColorRect" parent="TopBar/TopBarLayout"]
+layout_mode = 2
+custom_minimum_size = Vector2(36, 36)
+color = Color(1.0, 0.69, 0.0, 0.9)
+
+[node name="EmployeeIdLabel" type="Label" parent="TopBar/TopBarLayout"]
+layout_mode = 2
+text = "PROCESSOR  ████████-Θ-1"
+add_theme_color_override("font_color", Color(0.961, 0.929, 0.878, 1.0))
+
+[node name="FormTopSpacer" type="Control" parent="TopBar/TopBarLayout"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DissolutionLabel" type="Label" parent="TopBar/TopBarLayout"]
+layout_mode = 2
+text = "DISSOLUTION:"
+add_theme_color_override("font_color", Color(0.6, 0.6, 0.6, 1.0))
+
+[node name="DissolutionBar" type="ProgressBar" parent="TopBar/TopBarLayout"]
+layout_mode = 2
+custom_minimum_size = Vector2(120, 20)
+value = 4.2
+show_percentage = false
+
+[node name="ClearanceLabel" type="Label" parent="TopBar/TopBarLayout"]
+layout_mode = 2
+text = "CLEARANCE Θ-1"
+add_theme_color_override("font_color", Color(1.0, 0.69, 0.0, 1.0))
+
+[node name="FormBody" type="HSplitContainer" parent="."]
+layout_mode = 1
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 48.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftPanel" type="Panel" parent="FormBody"]
+layout_mode = 2
+custom_minimum_size = Vector2(200, 0)
+
+[node name="LeftVBox" type="VBoxContainer" parent="FormBody/LeftPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="WorkerLabel" type="Label" parent="FormBody/LeftPanel/LeftVBox"]
+layout_mode = 2
+text = "WORKER-UNIT"
+add_theme_color_override("font_color", Color(1.0, 0.69, 0.0, 1.0))
+
+[node name="PortraitContainer" type="ColorRect" parent="FormBody/LeftPanel/LeftVBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 180)
+size_flags_vertical = 0
+color = Color(0.3, 0.3, 0.35, 1.0)
+
+[node name="WorkerInfoLabel" type="RichTextLabel" parent="FormBody/LeftPanel/LeftVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = ""
+fit_content = false
+
+[node name="CenterPanel" type="Panel" parent="FormBody"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CenterScroll" type="ScrollContainer" parent="FormBody/CenterPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FormContainer" type="VBoxContainer" parent="FormBody/CenterPanel/CenterScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+
+[node name="FormHeader" type="VBoxContainer" parent="FormBody/CenterPanel/CenterScroll/FormContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="FormTypeLabel" type="Label" parent="FormBody/CenterPanel/CenterScroll/FormContainer/FormHeader"]
+layout_mode = 2
+text = "FORM"
+add_theme_color_override("font_color", Color(0.6, 0.6, 0.6, 1.0))
+
+[node name="FormTitleLabel" type="Label" parent="FormBody/CenterPanel/CenterScroll/FormContainer/FormHeader"]
+layout_mode = 2
+text = ""
+add_theme_color_override("font_color", Color(0.961, 0.929, 0.878, 1.0))
+theme_override_font_sizes/font_size = 18
+
+[node name="FormHeaderSep" type="HSeparator" parent="FormBody/CenterPanel/CenterScroll/FormContainer/FormHeader"]
+layout_mode = 2
+
+[node name="IssueLabel" type="RichTextLabel" parent="FormBody/CenterPanel/CenterScroll/FormContainer/FormHeader"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 40)
+size_flags_vertical = 0
+bbcode_enabled = true
+text = ""
+fit_content = true
+
+[node name="FieldsContainer" type="VBoxContainer" parent="FormBody/CenterPanel/CenterScroll/FormContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="SystemNoteBox" type="Panel" parent="FormBody/CenterPanel/CenterScroll/FormContainer"]
+layout_mode = 2
+
+[node name="SystemNoteLabel" type="RichTextLabel" parent="FormBody/CenterPanel/CenterScroll/FormContainer/SystemNoteBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = ""
+fit_content = true
+
+[node name="RightPanel" type="Panel" parent="FormBody"]
+layout_mode = 2
+custom_minimum_size = Vector2(180, 0)
+
+[node name="RightVBox" type="VBoxContainer" parent="FormBody/RightPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="PreviewTitle" type="Label" parent="FormBody/RightPanel/RightVBox"]
+layout_mode = 2
+text = "CONTINUITY PREVIEW"
+add_theme_color_override("font_color", Color(1.0, 0.69, 0.0, 1.0))
+
+[node name="PreviewSep" type="HSeparator" parent="FormBody/RightPanel/RightVBox"]
+layout_mode = 2
+
+[node name="PreviewContainer" type="VBoxContainer" parent="FormBody/RightPanel/RightVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 4
+
+[node name="ActionBar" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -52.0
+grow_vertical = 0
+
+[node name="ActionLayout" type="HBoxContainer" parent="ActionBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="SystemVoiceLabel" type="RichTextLabel" parent="ActionBar/ActionLayout"]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = ""
+fit_content = false
+
+[node name="DeferButton" type="Button" parent="ActionBar/ActionLayout"]
+layout_mode = 2
+text = "DEFER"
+
+[node name="RejectButton" type="Button" parent="ActionBar/ActionLayout"]
+layout_mode = 2
+text = "REJECT"
+
+[node name="ApproveButton" type="Button" parent="ActionBar/ActionLayout"]
+layout_mode = 2
+text = "APPROVE ✓"
+disabled = true
+
+[node name="CRTOverlay" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+mouse_filter = 2

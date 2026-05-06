@@ -1,0 +1,206 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcmterml00001"]
+
+[ext_resource type="Script" path="res://scripts/scenes/MainTerminal.gd" id="1_term01"]
+
+[node name="MainTerminal" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_term01")
+
+[node name="TopBar" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_bottom = 48.0
+grow_vertical = 2
+
+[node name="TopBarLayout" type="HBoxContainer" parent="TopBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="SealSmall" type="ColorRect" parent="TopBar/TopBarLayout"]
+layout_mode = 2
+custom_minimum_size = Vector2(36, 36)
+color = Color(1.0, 0.69, 0.0, 0.9)
+
+[node name="EmployeeIdLabel" type="Label" parent="TopBar/TopBarLayout"]
+layout_mode = 2
+text = "PROCESSOR  ████████-Θ-1"
+add_theme_color_override("font_color", Color(0.961, 0.929, 0.878, 1.0))
+
+[node name="TopSpacer" type="Control" parent="TopBar/TopBarLayout"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DissolutionLabel" type="Label" parent="TopBar/TopBarLayout"]
+layout_mode = 2
+text = "DISSOLUTION:"
+add_theme_color_override("font_color", Color(0.6, 0.6, 0.6, 1.0))
+
+[node name="DissolutionBar" type="ProgressBar" parent="TopBar/TopBarLayout"]
+layout_mode = 2
+custom_minimum_size = Vector2(120, 20)
+value = 4.2
+show_percentage = false
+
+[node name="ClearanceLabel" type="Label" parent="TopBar/TopBarLayout"]
+layout_mode = 2
+text = "CLEARANCE Θ-1"
+add_theme_color_override("font_color", Color(1.0, 0.69, 0.0, 1.0))
+
+[node name="MainBody" type="HSplitContainer" parent="."]
+layout_mode = 1
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 48.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftPanel" type="Panel" parent="MainBody"]
+layout_mode = 2
+custom_minimum_size = Vector2(220, 0)
+
+[node name="LeftVBox" type="VBoxContainer" parent="MainBody/LeftPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="PortraitLabel" type="Label" parent="MainBody/LeftPanel/LeftVBox"]
+layout_mode = 2
+text = "WORKER-UNIT"
+add_theme_color_override("font_color", Color(1.0, 0.69, 0.0, 1.0))
+
+[node name="PortraitContainer" type="ColorRect" parent="MainBody/LeftPanel/LeftVBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 200)
+size_flags_vertical = 0
+color = Color(0.3, 0.3, 0.35, 1.0)
+
+[node name="CaseInfoLabel" type="RichTextLabel" parent="MainBody/LeftPanel/LeftVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[color=#666666][i]Select a case to view worker-unit details.[/i][/color]"
+fit_content = false
+
+[node name="CenterPanel" type="Panel" parent="MainBody"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CenterVBox" type="VBoxContainer" parent="MainBody/CenterPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="DailyGreeting" type="RichTextLabel" parent="MainBody/CenterPanel/CenterVBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 80)
+size_flags_vertical = 0
+bbcode_enabled = true
+text = ""
+
+[node name="CasesHeader" type="Label" parent="MainBody/CenterPanel/CenterVBox"]
+layout_mode = 2
+text = "— PENDING CASES —"
+add_theme_color_override("font_color", Color(1.0, 0.69, 0.0, 1.0))
+horizontal_alignment = 1
+
+[node name="CaseSeparator" type="HSeparator" parent="MainBody/CenterPanel/CenterVBox"]
+layout_mode = 2
+
+[node name="CaseListScroll" type="ScrollContainer" parent="MainBody/CenterPanel/CenterVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CaseListContainer" type="VBoxContainer" parent="MainBody/CenterPanel/CenterVBox/CaseListScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="RightPanel" type="Panel" parent="MainBody"]
+layout_mode = 2
+custom_minimum_size = Vector2(200, 0)
+
+[node name="RightVBox" type="VBoxContainer" parent="MainBody/RightPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="MetricsTitle" type="Label" parent="MainBody/RightPanel/RightVBox"]
+layout_mode = 2
+text = "METRICS"
+add_theme_color_override("font_color", Color(1.0, 0.69, 0.0, 1.0))
+
+[node name="MetricsSeparator" type="HSeparator" parent="MainBody/RightPanel/RightVBox"]
+layout_mode = 2
+
+[node name="MetricsContainer" type="VBoxContainer" parent="MainBody/RightPanel/RightVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="BottomBar" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -48.0
+grow_vertical = 0
+
+[node name="BottomBarLayout" type="HBoxContainer" parent="BottomBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="OpenFileButton" type="Button" parent="BottomBar/BottomBarLayout"]
+layout_mode = 2
+text = "[F] VIEW YOUR CONTINUITY FILE"
+
+[node name="BottomSpacer" type="Control" parent="BottomBar/BottomBarLayout"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EndShiftButton" type="Button" parent="BottomBar/BottomBarLayout"]
+layout_mode = 2
+text = "END SHIFT →"
+disabled = true
+
+[node name="CRTOverlay" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+mouse_filter = 2
