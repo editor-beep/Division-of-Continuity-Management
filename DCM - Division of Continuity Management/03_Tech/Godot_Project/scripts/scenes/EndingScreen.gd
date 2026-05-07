@@ -6,13 +6,13 @@ extends Control
 
 const BOOT_SCENE := "res://scenes/boot/BootScreen.tscn"
 
-@onready var ending_title: Label            = $VBoxContainer/EndingTitle
-@onready var portrait_final: ColorRect      = $VBoxContainer/PortraitFinal
-@onready var ending_description: RichTextLabel = $VBoxContainer/EndingDescription
-@onready var system_voice: RichTextLabel    = $VBoxContainer/SystemVoice
-@onready var post_credits: RichTextLabel    = $VBoxContainer/PostCredits
-@onready var new_game_plus_btn: Button      = $VBoxContainer/ButtonContainer/NewGamePlusButton
-@onready var main_menu_btn: Button          = $VBoxContainer/ButtonContainer/MainMenuButton
+@onready var ending_title: Label            = $ScrollContainer/VBoxContainer/EndingTitle
+@onready var portrait_final: ColorRect      = $ScrollContainer/VBoxContainer/PortraitFinal
+@onready var ending_description: RichTextLabel = $ScrollContainer/VBoxContainer/EndingDescription
+@onready var system_voice: RichTextLabel    = $ScrollContainer/VBoxContainer/SystemVoice
+@onready var post_credits: RichTextLabel    = $ScrollContainer/VBoxContainer/PostCredits
+@onready var new_game_plus_btn: Button      = $ScrollContainer/VBoxContainer/ButtonContainer/NewGamePlusButton
+@onready var main_menu_btn: Button          = $ScrollContainer/VBoxContainer/ButtonContainer/MainMenuButton
 @onready var crt_overlay: ColorRect         = $CRTOverlay
 @onready var background: ColorRect          = $Background
 
