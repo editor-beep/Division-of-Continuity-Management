@@ -36,16 +36,24 @@ var _typing_timer: float = 0.0
 var _current_char: int   = 0
 var _done: bool = false
 var _ready_for_input: bool = false
+var _boot_started: bool = false
+var _ready_started_ms: int = 0
 
 # Typewriter state
 var _full_current_line: String = ""
 
 func _ready() -> void:
-	background.color     = Color(0.039, 0.039, 0.059, 1.0)
+	background.color = Color(0.039, 0.039, 0.059, 1.0)
+	modulate = Color(1, 1, 1, 1)
+	_ready_started_ms = Time.get_ticks_msec()
 	if is_instance_valid(prompt_label):
 		prompt_label.visible = false
 	boot_text.bbcode_enabled = true
 	boot_text.text = ""
+	boot_text.modulate = Color(0.92, 0.95, 1.0, 1.0)
+	if is_instance_valid(prompt_label):
+		prompt_label.modulate = Color(1.0, 0.84, 0.35, 1.0)
+	set_process(true)
 	_animate_seal_in()
 
 	# Apply CRT shader if available
@@ -63,6 +71,9 @@ func _ready() -> void:
 		geometry_bg.material = mat
 
 func _process(delta: float) -> void:
+	# Failsafe: if a tween or callback fails, start the boot text directly.
+	if not _boot_started and Time.get_ticks_msec() - _ready_started_ms > 2500:
+		_start_boot_text()
 	if _done:
 		return
 	_typing_timer -= delta
@@ -82,6 +93,7 @@ func _animate_seal_in() -> void:
 	tween.finished.connect(_start_boot_text)
 
 func _start_boot_text() -> void:
+	_boot_started = true
 	_current_line = 0
 	_typing_timer = 0.3
 	_advance_to_next_line()
@@ -124,5 +136,7 @@ func _transition_to_terminal() -> void:
 		# Load existing save if present
 		if SaveSystem.has_save():
 			SaveSystem.load_game()
-		get_tree().change_scene_to_file(MAIN_TERMINAL_SCENE)
+		var scene_error := get_tree().change_scene_to_file(MAIN_TERMINAL_SCENE)
+		if scene_error != OK:
+			push_error("BootScreen: Failed to load main scene (%s), error code: %d" % [MAIN_TERMINAL_SCENE, scene_error])
 	)
