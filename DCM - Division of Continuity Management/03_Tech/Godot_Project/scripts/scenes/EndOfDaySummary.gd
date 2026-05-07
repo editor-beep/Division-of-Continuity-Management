@@ -7,13 +7,13 @@ const TERMINAL_SCENE    := "res://scenes/terminal/MainTerminal.tscn"
 const PLAYER_FILE_SCENE := "res://scenes/player_file/PlayerFile.tscn"
 const ENDING_SCENE      := "res://scenes/endings/EndingScreen.tscn"
 
-@onready var title_label: Label             = $ContentContainer/TitleLabel
-@onready var stats_delta_container: VBoxContainer = $ContentContainer/StatsDeltaContainer
-@onready var ripples_title: Label           = $ContentContainer/RipplesTitle
-@onready var ripples_container: VBoxContainer = $ContentContainer/RipplesContainer
-@onready var unlock_label: Label            = $ContentContainer/UnlockLabel
-@onready var review_file_btn: Button        = $ContentContainer/ActionsContainer/ReviewFileButton
-@onready var proceed_btn: Button            = $ContentContainer/ActionsContainer/ProceedButton
+@onready var title_label: Label             = $ScrollContainer/ContentContainer/TitleLabel
+@onready var stats_delta_container: VBoxContainer = $ScrollContainer/ContentContainer/StatsDeltaContainer
+@onready var ripples_title: Label           = $ScrollContainer/ContentContainer/RipplesTitle
+@onready var ripples_container: VBoxContainer = $ScrollContainer/ContentContainer/RipplesContainer
+@onready var unlock_label: Label            = $ScrollContainer/ContentContainer/UnlockLabel
+@onready var review_file_btn: Button        = $ScrollContainer/ContentContainer/ActionsContainer/ReviewFileButton
+@onready var proceed_btn: Button            = $ScrollContainer/ContentContainer/ActionsContainer/ProceedButton
 @onready var crt_overlay: ColorRect         = $CRTOverlay
 
 var _stats_before: Dictionary = {}
