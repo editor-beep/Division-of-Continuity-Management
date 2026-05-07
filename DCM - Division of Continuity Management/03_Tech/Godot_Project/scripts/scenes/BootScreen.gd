@@ -27,8 +27,8 @@ const BOOT_LINES := [
 @onready var seal_container: Control      = $SealContainer
 @onready var seal_rect: ColorRect         = $SealContainer/SealRect
 @onready var boot_text: RichTextLabel     = $ContentContainer/BootText
-@onready var prompt_label: Label          = $ContentContainer/PromptLabel
-@onready var crt_overlay: ColorRect       = $CRTOverlay
+@onready var prompt_label: Label          = get_node_or_null("ContentContainer/PromptLabel") as Label
+@onready var crt_overlay: ColorRect       = get_node_or_null("CRTOverlay") as ColorRect
 @onready var geometry_bg: ColorRect       = $GeometryBackground
 
 var _current_line: int = 0
@@ -42,14 +42,15 @@ var _full_current_line: String = ""
 
 func _ready() -> void:
 	background.color     = Color(0.039, 0.039, 0.059, 1.0)
-	prompt_label.visible = false
+	if is_instance_valid(prompt_label):
+		prompt_label.visible = false
 	boot_text.bbcode_enabled = true
 	boot_text.text = ""
 	_animate_seal_in()
 
 	# Apply CRT shader if available
 	var crt_shader = load("res://shaders/crt.gdshader")
-	if crt_shader:
+	if crt_shader and is_instance_valid(crt_overlay):
 		var mat := ShaderMaterial.new()
 		mat.shader = crt_shader
 		crt_overlay.material = mat

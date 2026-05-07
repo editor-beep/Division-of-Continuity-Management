@@ -106,7 +106,7 @@ func _check_optimal_assimilation(stats: Dictionary, _flags: Dictionary) -> bool:
 		and stats.get("efficiency_score", 0.0)    >= 85.0
 		and stats.get("mythic_residue", 0.0)       <= 40.0)
 
-func _check_quiet_rebellion(stats: Dictionary, flags: Dictionary) -> bool:
+func _check_quiet_rebellion(stats: Dictionary, _flags: Dictionary) -> bool:
 	var diss: float  = stats.get("dissolution_index",  0.0)
 	var eff: float   = stats.get("efficiency_score",   0.0)
 	var surp: float  = stats.get("emotional_surplus",  0.0)

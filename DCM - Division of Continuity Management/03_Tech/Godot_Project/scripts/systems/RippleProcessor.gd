@@ -16,10 +16,10 @@ signal ripple_event(ripple: Dictionary)
 ## Call this at end-of-day before advancing.
 func resolve_all() -> Array:
 	var resolved: Array = []
-	var queue: Array = ContinuityState.pending_ripples.duplicate(true)
+	var pending_queue: Array = ContinuityState.pending_ripples.duplicate(true)
 	ContinuityState.pending_ripples.clear()
 
-	for ripple: Dictionary in queue:
+	for ripple: Dictionary in pending_queue:
 		var summary: Dictionary = _resolve_ripple(ripple)
 		resolved.append(summary)
 
