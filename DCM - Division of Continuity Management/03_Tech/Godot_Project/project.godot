@@ -18,10 +18,10 @@ config/tags=PackedStringArray("narrative", "horror", "bureaucracy")
 [autoload]
 
 ContinuityState="*res://scripts/autoloads/ContinuityState.gd"
-SaveSystem="res://scripts/systems/SaveSystem.gd"
-CaseLoader="res://scripts/systems/CaseLoader.gd"
-RippleProcessor="res://scripts/systems/RippleProcessor.gd"
-EndingEvaluator="res://scripts/systems/EndingEvaluator.gd"
+SaveSystem="*res://scripts/systems/SaveSystem.gd"
+CaseLoader="*res://scripts/systems/CaseLoader.gd"
+RippleProcessor="*res://scripts/systems/RippleProcessor.gd"
+EndingEvaluator="*res://scripts/systems/EndingEvaluator.gd"
 
 [display]
 
