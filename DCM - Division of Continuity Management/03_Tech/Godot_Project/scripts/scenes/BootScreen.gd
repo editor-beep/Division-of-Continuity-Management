@@ -89,8 +89,9 @@ func _advance_to_next_line() -> void:
 	if _current_line >= BOOT_LINES.size():
 		_done = true
 		_ready_for_input = true
-		prompt_label.visible = true
-		_pulse_prompt()
+		if is_instance_valid(prompt_label):
+			prompt_label.visible = true
+			_pulse_prompt()
 		return
 	_full_current_line = BOOT_LINES[_current_line]
 	_current_char = 0

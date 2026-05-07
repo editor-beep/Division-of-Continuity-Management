@@ -96,7 +96,8 @@ func _render_ending() -> void:
 	post_credits.modulate.a = 0.0
 
 	# New Game+ button
-	new_game_plus_btn.visible = EndingEvaluator.unlocks_ng_plus(_ending_id)
+	if is_instance_valid(new_game_plus_btn):
+		new_game_plus_btn.visible = EndingEvaluator.unlocks_ng_plus(_ending_id)
 
 func _type_voice(full_text: String) -> void:
 	# Use a character counter variable so the typewriter effect advances correctly.
