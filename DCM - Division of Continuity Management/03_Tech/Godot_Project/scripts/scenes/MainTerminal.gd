@@ -13,7 +13,7 @@ const SUMMARY_SCENE     := "res://scenes/summary/EndOfDaySummary.tscn"
 @onready var dissolution_bar: ProgressBar   = $TopBar/TopBarLayout/DissolutionBar
 @onready var daily_greeting: RichTextLabel  = $MainBody/CenterPanel/CenterVBox/DailyGreeting
 @onready var case_list_container: VBoxContainer = $MainBody/CenterPanel/CenterVBox/CaseListScroll/CaseListContainer
-@onready var portrait_container: ColorRect  = $MainBody/LeftPanel/LeftVBox/PortraitContainer
+@onready var portrait_container: VectorPortrait = $MainBody/LeftPanel/LeftVBox/PortraitContainer
 @onready var case_info_label: RichTextLabel = $MainBody/LeftPanel/LeftVBox/CaseInfoLabel
 @onready var metrics_container: VBoxContainer = $MainBody/RightPanel/RightVBox/MetricsContainer
 @onready var open_file_btn: Button          = $BottomBar/BottomBarLayout/OpenFileButton
@@ -126,6 +126,8 @@ func _open_case(case_id: String, case_data: Dictionary) -> void:
 		str(wu.get("age", "")),
 		case_data.get("issue", ""),
 	]
+	# Show worker portrait
+	portrait_container.setup(wu, case_data.get("form_type", ""))
 	# Fade to form screen
 	var tween := create_tween()
 	tween.tween_property(self, "modulate:a", 0.0, 0.4)

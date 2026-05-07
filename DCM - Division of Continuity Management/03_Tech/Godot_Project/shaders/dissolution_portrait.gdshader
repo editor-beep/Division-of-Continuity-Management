@@ -1,6 +1,6 @@
 // dissolution_portrait.gdshader
 // Godot 4 canvas_item shader for the player's evolving portrait.
-// At dissolution_level = 0: renders the source texture normally.
+// At dissolution_level = 0: renders the source texture (or built-in silhouette).
 // As dissolution rises: geometric patterns emerge, overlaying and replacing
 // the human portrait with a glowing sacred mandala sigil.
 shader_type canvas_item;
@@ -10,6 +10,52 @@ uniform float dissolution_level: hint_range(0.0, 1.0) = 0.0;
 uniform vec4 sigil_color: source_color = vec4(1.0, 0.690, 0.0, 1.0);
 uniform vec4 mythic_color: source_color = vec4(0.549, 0.306, 1.0, 1.0);
 uniform sampler2D SCREEN_TEXTURE: hint_screen_texture, filter_linear_mipmap;
+/// When true the shader draws its own procedural silhouette instead of
+/// sampling TEXTURE. Set this to true on ColorRect portrait nodes that
+/// have no source image assigned.
+uniform bool use_generated_silhouette: hint_default_true = true;
+
+// ── SDF helpers for the procedural silhouette ─────────────────────────────────
+
+float sdf_circle(vec2 uv, vec2 center, float r) {
+	return length(uv - center) - r;
+}
+
+float sdf_rect(vec2 uv, vec2 center, vec2 half_size) {
+	vec2 d = abs(uv - center) - half_size;
+	return length(max(d, 0.0)) + min(max(d.x, d.y), 0.0);
+}
+
+/// Returns the blended skin / body colour for a humanoid silhouette at UV.
+vec4 generate_silhouette(vec2 uv) {
+	vec4 bg       = vec4(0.10, 0.09, 0.12, 1.0);
+	vec4 skin     = vec4(0.72, 0.67, 0.61, 1.0);
+	vec4 shoulder = vec4(0.48, 0.44, 0.40, 1.0);
+
+	// Head circle centred at (0.5, 0.28), radius ≈ 0.17
+	float head = sdf_circle(uv, vec2(0.5, 0.28), 0.17);
+
+	// Neck — thin vertical rect
+	float neck = sdf_rect(uv, vec2(0.5, 0.475), vec2(0.068, 0.055));
+
+	// Body / shoulder block — wide rect clipped by diagonal shoulder cuts
+	float body = sdf_rect(uv, vec2(0.5, 0.73), vec2(0.40, 0.27));
+	// Taper: cut away upper corners so the silhouette tapers from head to body
+	float left_taper  = (uv.x - 0.5) - 1.8 * (uv.y - 0.54);
+	float right_taper = -(uv.x - 0.5) - 1.8 * (uv.y - 0.54);
+	body = max(body, max(left_taper, right_taper) - 0.04);
+
+	float figure = min(min(head, neck), body);
+
+	if (figure < 0.0) {
+		// Blend skin (upper) into shoulder tone (lower)
+		float blend = smoothstep(0.32, 0.58, uv.y);
+		return mix(skin, shoulder, blend);
+	}
+	return bg;
+}
+
+// ── Geometric overlay helpers ─────────────────────────────────────────────────
 
 // Concentric-ring pattern for the geometric overlay
 float geo_rings(vec2 uv, float rings, float speed) {
@@ -34,7 +80,14 @@ float geo_grid(vec2 uv, float density) {
 
 void fragment() {
 	vec2 uv = UV;
-	vec4 original = texture(TEXTURE, uv);
+
+	// Resolve the base portrait: procedural silhouette or source texture.
+	vec4 original;
+	if (use_generated_silhouette) {
+		original = generate_silhouette(uv);
+	} else {
+		original = texture(TEXTURE, uv);
+	}
 
 	// At zero dissolution, render the original portrait unchanged
 	if (dissolution_level < 0.01) {

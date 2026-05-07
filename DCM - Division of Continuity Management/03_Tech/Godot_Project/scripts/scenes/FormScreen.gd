@@ -11,7 +11,7 @@ const FORM_FIELD_SCENE := "res://scenes/components/FormField.tscn"
 @onready var employee_id_label: Label       = $TopBar/TopBarLayout/EmployeeIdLabel
 @onready var clearance_label: Label         = $TopBar/TopBarLayout/ClearanceLabel
 @onready var dissolution_bar: ProgressBar   = $TopBar/TopBarLayout/DissolutionBar
-@onready var worker_portrait: ColorRect     = $FormBody/LeftPanel/LeftVBox/PortraitContainer
+@onready var worker_portrait: VectorPortrait = $FormBody/LeftPanel/LeftVBox/PortraitContainer
 @onready var worker_info_label: RichTextLabel = $FormBody/LeftPanel/LeftVBox/WorkerInfoLabel
 @onready var form_type_label: Label         = $FormBody/CenterPanel/CenterScroll/FormContainer/FormHeader/FormTypeLabel
 @onready var form_title_label: Label        = $FormBody/CenterPanel/CenterScroll/FormContainer/FormHeader/FormTitleLabel
@@ -87,7 +87,7 @@ func _render_case() -> void:
 			_case_data.get("issue", ""),
 		]
 	)
-	worker_portrait.color = _portrait_color_for_case()
+	worker_portrait.setup(_case_data.get("worker_unit", {}), _case_data.get("form_type", ""))
 
 	# Form header
 	form_type_label.text  = "FORM %s" % _case_data.get("form_type", "")
@@ -257,15 +257,3 @@ func _on_state_changed(key: String, _value: Variant) -> void:
 
 func _return_to_terminal() -> void:
 	get_tree().change_scene_to_file(TERMINAL_SCENE)
-
-func _portrait_color_for_case() -> Color:
-	var form_type: String = _case_data.get("form_type", "")
-	match form_type:
-		"Θ-SR1", "Θ-SR2", "Θ-SR3":
-			return Color(0.549, 0.306, 1.0, 0.6)   # Purple — self-referential
-		"M-11", "M-11b":
-			return Color(1.0, 0.69, 0.0, 0.5)      # Amber — mythic
-		"G-7":
-			return Color(0.0, 0.722, 0.690, 0.5)   # Teal — grief
-		_:
-			return Color(0.3, 0.3, 0.35, 1.0)      # Neutral

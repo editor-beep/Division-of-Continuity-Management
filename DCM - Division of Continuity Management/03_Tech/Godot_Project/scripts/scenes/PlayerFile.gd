@@ -50,15 +50,19 @@ func _render_header() -> void:
 
 func _render_portrait() -> void:
 	var stage: int = ContinuityState.player_portrait_stage
-	# Tint the portrait container to reflect dissolution stage
-	var human_color := Color(0.35, 0.30, 0.28, 1.0)
-	var sigil_color := Color(1.0, 0.69, 0.0, 1.0)
-	portrait_container.color = human_color.lerp(sigil_color, float(stage) / 5.0)
 
 	if _portrait_shader:
 		_portrait_shader.set_shader_parameter(
 			"dissolution_level", ContinuityState.dissolution_index / 100.0
 		)
+		# Always use the shader's built-in procedural silhouette —
+		# no source image file is required.
+		_portrait_shader.set_shader_parameter("use_generated_silhouette", true)
+	else:
+		# Fallback when shader didn't load: tint the rect from warm brown → amber.
+		var human_color := Color(0.35, 0.30, 0.28, 1.0)
+		var sigil_color := Color(1.0,  0.69, 0.0,  1.0)
+		portrait_container.color = human_color.lerp(sigil_color, float(stage) / 5.0)
 
 	var stage_labels := [
 		"",

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dcmforms00001"]
+[gd_scene load_steps=3 format=3 uid="uid://dcmforms00001"]
 
 [ext_resource type="Script" path="res://scripts/scenes/FormScreen.gd" id="1_form01"]
+[ext_resource type="Script" path="res://scripts/ui/VectorPortrait.gd" id="2_portrait01"]
 
 [node name="FormScreen" type="Control"]
 layout_mode = 3
@@ -97,11 +98,12 @@ layout_mode = 2
 text = "WORKER-UNIT"
 add_theme_color_override("font_color", Color(1.0, 0.69, 0.0, 1.0))
 
-[node name="PortraitContainer" type="ColorRect" parent="FormBody/LeftPanel/LeftVBox"]
+[node name="PortraitContainer" type="Control" parent="FormBody/LeftPanel/LeftVBox"]
 layout_mode = 2
 custom_minimum_size = Vector2(0, 180)
+size_flags_horizontal = 3
 size_flags_vertical = 0
-color = Color(0.3, 0.3, 0.35, 1.0)
+script = ExtResource("2_portrait01")
 
 [node name="WorkerInfoLabel" type="RichTextLabel" parent="FormBody/LeftPanel/LeftVBox"]
 layout_mode = 2
