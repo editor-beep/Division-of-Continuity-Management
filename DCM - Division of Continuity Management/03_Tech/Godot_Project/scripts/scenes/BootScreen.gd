@@ -33,9 +33,7 @@ const BOOT_LINES := [
 
 var _current_line: int = 0
 var _typing_timer: float = 0.0
-var _char_timer: float   = 0.0
 var _current_char: int   = 0
-var _current_line_text: String = ""
 var _done: bool = false
 var _ready_for_input: bool = false
 
