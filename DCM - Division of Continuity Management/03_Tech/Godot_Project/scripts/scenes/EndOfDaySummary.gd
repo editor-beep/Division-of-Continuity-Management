@@ -115,6 +115,8 @@ func _populate_ripples() -> void:
 func _populate_unlocks() -> void:
 	var new_clearance: int = ContinuityState.clearance_level
 	var old_clearance: int = int(_stats_before.get("clearance_level", new_clearance))
+	if not is_instance_valid(unlock_label):
+		return
 	if new_clearance > old_clearance:
 		unlock_label.text = (
 			"CLEARANCE UPDATE: Θ-%d granted.\nNew form fields and case types are now available." % new_clearance
