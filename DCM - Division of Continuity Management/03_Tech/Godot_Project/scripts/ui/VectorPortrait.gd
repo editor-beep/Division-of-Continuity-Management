@@ -112,7 +112,7 @@ func _draw() -> void:
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
 func _draw_corner_marks(w: float, h: float) -> void:
-	var accent: Color = _form_type_color()
+	var accent: Color = form_type_color(form_type)
 	var m: float = 4.0
 	var s: float = 9.0
 	# Top-left
@@ -122,9 +122,14 @@ func _draw_corner_marks(w: float, h: float) -> void:
 	draw_rect(Rect2(w - m - s, m, s, 2.0),  accent * Color(1.0, 1.0, 1.0, 0.75))
 	draw_rect(Rect2(w - m - 2.0, m, 2.0, s), accent * Color(1.0, 1.0, 1.0, 0.75))
 
-func _form_type_color() -> Color:
-	match form_type:
+## Returns the canonical accent colour for a given form type string.
+## Static so other scripts can use it without needing a VectorPortrait instance.
+static func form_type_color(p_form_type: String) -> Color:
+	match p_form_type:
 		"Θ-SR1", "Θ-SR2", "Θ-SR3": return Color(0.549, 0.306, 1.0)    # Purple — self-referential
 		"M-11",  "M-11b":           return Color(1.0,   0.69,  0.0)    # Amber  — mythic
 		"G-7":                      return Color(0.0,   0.722, 0.690)  # Teal   — grief
 		_:                          return Color(0.70,  0.70,  0.80)   # Neutral
+
+func _form_type_color() -> Color:
+	return form_type_color(form_type)

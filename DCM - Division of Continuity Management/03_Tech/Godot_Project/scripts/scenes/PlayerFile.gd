@@ -55,8 +55,9 @@ func _render_portrait() -> void:
 		_portrait_shader.set_shader_parameter(
 			"dissolution_level", ContinuityState.dissolution_index / 100.0
 		)
-		# Always use the shader's built-in procedural silhouette —
-		# no source image file is required.
+		# Enable the shader's built-in procedural silhouette for the player
+		# portrait. External images are not required here; the shader generates
+		# the human form that progressively dissolves into geometric patterns.
 		_portrait_shader.set_shader_parameter("use_generated_silhouette", true)
 	else:
 		# Fallback when shader didn't load: tint the rect from warm brown → amber.
