@@ -1,5 +1,27 @@
+export type NumericStatKey =
+  | 'dissolution_index'
+  | 'efficiency_score'
+  | 'continuity_contribution'
+  | 'mythic_residue'
+  | 'narrative_stability'
+  | 'emotional_surplus'
+  | 'reality_stability'
+  | 'department_strain'
+  | 'unraveling_events'
+  | 'mythic_commodities_index'
+  | 'collective_nostalgia';
+
+export type GamePhase = 'boot' | 'terminal' | 'case' | 'end_of_day' | 'player_file' | 'ending';
+export type Era = 'Act1' | 'Act2' | 'Act3';
+export type RippleType = 'small' | 'medium' | 'major';
+
+export interface Ripple {
+  type: RippleType;
+  text: string;
+  delayed_effects?: Record<string, number>;
+}
+
 export interface GameState {
-  // Player state
   dissolution_index: number;
   efficiency_score: number;
   continuity_contribution: number;
@@ -7,69 +29,51 @@ export interface GameState {
   mythic_residue: number;
   narrative_stability: number;
   emotional_surplus: number;
-  
-  // World state
+
   reality_stability: number;
   department_strain: number;
   unraveling_events: number;
   mythic_commodities_index: number;
   collective_nostalgia: number;
-  
-  // Session state
+
+  era: Era;
   current_day: number;
   daily_cases_processed: number;
   completed_cases: string[];
-  active_flags: string[];
+  deferred_cases: string[];
+  flags: Record<string, boolean>;
   pending_ripples: Ripple[];
-  game_phase: 'boot' | 'terminal' | 'case' | 'end_of_day' | 'player_file' | 'ending';
+  game_phase: GamePhase;
   active_ending: string | null;
   active_case_id: string | null;
-  
-  // Actions
-  completeCase: (caseId: string, effects: Record<string, number>, flags: string[], ripples: Ripple[]) => void;
+  echo_interactions: number;
+
+  completeCase: (
+    caseId: string,
+    effects: Record<string, number>,
+    flags_to_set: string[],
+    ripples: Ripple[]
+  ) => void;
+  deferCase: (caseId: string) => void;
+  applyStat: (key: NumericStatKey, delta: number) => void;
+  setFlag: (key: string, value?: boolean) => void;
+  hasFlag: (key: string) => boolean;
+  queueRipple: (ripple: Ripple) => void;
+  resolveRipple: () => void;
+  evaluateEnding: () => string;
   advanceDay: () => void;
   triggerEnding: (endingId: string) => void;
   resetGame: () => void;
-  setGamePhase: (phase: GameState['game_phase']) => void;
-  setActiveCase: (caseId: string) => void;
-  resolveRipple: () => void;
+  setGamePhase: (phase: GamePhase) => void;
+  setActiveCase: (caseId: string | null) => void;
 }
 
-export interface Ripple {
-  type: 'small' | 'medium' | 'major';
-  text: string;
-  delayed_effects?: Record<string, number>;
-}
-
-export interface Case {
+export interface WorkerUnit {
   id: string;
-  day: number;
-  form_type: string;
-  form_title: string;
-  title: string;
-  clearance_required: number;
-  is_return_case: boolean;
-  requires_flag: string;
-  worker_unit: {
-    id: string;
-    name: string;
-    age: number;
-    occupation: string;
-  };
-  issue: string;
-  system_note: string;
-  sections: Section[];
-  completion_flag: string;
-  unlocks_on_completion: string[];
+  name: string;
+  age: number;
+  occupation: string;
 }
-
-export interface Section {
-  id: string;
-  title: string;
-  fields: Field[];
-}
-
-export type Field = ChoiceField | SliderField | TextField | ToggleField;
 
 export interface BaseField {
   id: string;
@@ -77,19 +81,19 @@ export interface BaseField {
   description?: string;
 }
 
-export interface ChoiceField extends BaseField {
-  type: 'choice';
-  required: boolean;
-  options: Option[];
-}
-
-export interface Option {
+export interface ChoiceOption {
   id: string;
   label: string;
   sublabel?: string;
   effects: Record<string, number>;
   flags_set: string[];
   ripples: Ripple[];
+}
+
+export interface ChoiceField extends BaseField {
+  type: 'choice';
+  required: boolean;
+  options: ChoiceOption[];
 }
 
 export interface SliderField extends BaseField {
@@ -112,4 +116,29 @@ export interface ToggleField extends BaseField {
   effects_on: Record<string, number>;
   effects_off: Record<string, number>;
   ripples_on: Ripple[];
+}
+
+export type Field = ChoiceField | SliderField | TextField | ToggleField;
+
+export interface Section {
+  id: string;
+  title: string;
+  fields: Field[];
+}
+
+export interface Case {
+  id: string;
+  day: number;
+  form_type: string;
+  form_title: string;
+  title: string;
+  clearance_required: number;
+  is_return_case: boolean;
+  requires_flag: string;
+  worker_unit: WorkerUnit;
+  issue: string;
+  system_note: string;
+  sections: Section[];
+  completion_flag: string;
+  unlocks_on_completion: string[];
 }

@@ -1,9 +1,18 @@
-import day1 from './cases_day_01.json';
-import day2 from './cases_day_02.json';
-import day3 from './cases_day_03.json';
+import day1Raw from './cases_day_01.json';
+import day2Raw from './cases_day_02.json';
+import day3Raw from './cases_day_03.json';
+import { Case } from '../types';
 
-export const allCases = [
-  ...day1.cases,
-  ...day2.cases,
-  ...day3.cases
+export const allCases: Case[] = [
+  ...(day1Raw.cases as Case[]),
+  ...(day2Raw.cases as Case[]),
+  ...(day3Raw.cases as Case[]),
 ];
+
+export function getCasesForDay(day: number): Case[] {
+  return allCases.filter((c) => c.day === day);
+}
+
+export function getCaseById(id: string): Case | undefined {
+  return allCases.find((c) => c.id === id);
+}
