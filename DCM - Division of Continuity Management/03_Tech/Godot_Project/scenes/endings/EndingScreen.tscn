@@ -72,7 +72,9 @@ bbcode_enabled = true
 text = ""
 fit_content = true
 autowrap_mode = 3
-add_theme_font_size_override("normal_font_size", 16)
+add_theme_font_size_override("normal_font_size", 18)
+add_theme_constant_override("outline_size", 1)
+add_theme_color_override("font_outline_color", Color(0.16, 0.09, 0.0, 0.9))
 
 [node name="PostCreditsSep" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
