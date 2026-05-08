@@ -5,12 +5,24 @@ import { SYSTEM_VOICE } from '../data/voiceLines';
 import { TypewriterText } from '../components/TypewriterText';
 import { RippleCard } from '../components/RippleCard';
 import { StatBar } from '../components/StatBar';
+import { StatSnapshot } from '../types';
 
 type Phase = 'summary' | 'ripples' | 'stats' | 'complete';
+
+const STAT_LABELS: Record<keyof StatSnapshot, string> = {
+  dissolution_index:   'DISSOLUTION INDEX',
+  efficiency_score:    'EFFICIENCY RATING',
+  mythic_residue:      'MYTHIC RESIDUE',
+  narrative_stability: 'NARRATIVE STABILITY',
+  emotional_surplus:   'EMOTIONAL SURPLUS',
+  reality_stability:   'REALITY STABILITY',
+  department_strain:   'DEPT. STRAIN',
+};
 
 export function EndOfDayScreen() {
   const store = useGameStore();
   const [phase, setPhase] = useState<Phase>('summary');
+  const [startSnapshot] = useState<StatSnapshot>(() => store.snapshotStats());
   const resolving = useRef(false);
 
   const getSummaryText = () => {
@@ -42,6 +54,18 @@ export function EndOfDayScreen() {
       store.advanceDay();
     }
   };
+
+  const currentSnapshot: StatSnapshot = {
+    dissolution_index:   store.dissolution_index,
+    efficiency_score:    store.efficiency_score,
+    mythic_residue:      store.mythic_residue,
+    narrative_stability: store.narrative_stability,
+    emotional_surplus:   store.emotional_surplus,
+    reality_stability:   store.reality_stability,
+    department_strain:   store.department_strain,
+  };
+
+  const statKeys = Object.keys(STAT_LABELS) as (keyof StatSnapshot)[];
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-start p-8 font-mono max-w-3xl mx-auto pt-12">
@@ -98,11 +122,46 @@ export function EndOfDayScreen() {
             <h2 className="text-sm tracking-widest opacity-50 mb-6 text-center">
               — END OF DAY METRICS —
             </h2>
+
+            <div className="w-full border border-[#FFB000]/20 mb-8">
+              <div className="grid grid-cols-4 text-xs opacity-40 tracking-widest p-3 border-b border-[#FFB000]/10">
+                <span className="col-span-2">METRIC</span>
+                <span className="text-center">START</span>
+                <span className="text-center">END</span>
+              </div>
+              {statKeys.map((key) => {
+                const before = startSnapshot[key];
+                const after  = currentSnapshot[key];
+                const delta  = after - before;
+                const sign   = delta > 0 ? '+' : '';
+                const deltaColor =
+                  Math.abs(delta) < 0.05 ? 'text-[#FFB000]/40'
+                  : delta > 0 ? 'text-[#00B8B0]'
+                  : 'text-[#5C0010]';
+                return (
+                  <div key={key} className="grid grid-cols-4 p-3 border-b border-[#FFB000]/10 text-xs items-center">
+                    <span className="col-span-2 opacity-60 uppercase tracking-wide">
+                      {STAT_LABELS[key]}
+                    </span>
+                    <span className="text-center opacity-50">{before.toFixed(1)}</span>
+                    <span className={`text-center font-bold ${deltaColor}`}>
+                      {after.toFixed(1)}
+                      {Math.abs(delta) >= 0.05 && (
+                        <span className="ml-1 opacity-70 text-[10px]">
+                          ({sign}{delta.toFixed(1)})
+                        </span>
+                      )}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-5 mb-8">
-              <StatBar label="DISSOLUTION INDEX" value={store.dissolution_index} colorClass="bg-[#FFB000]" highValueColorClass="bg-[#8C4EFF]" />
-              <StatBar label="EFFICIENCY RATING" value={store.efficiency_score} colorClass="bg-[#00B8B0]" />
-              <StatBar label="REALITY STABILITY" value={store.reality_stability} colorClass="bg-[#F5EDE0]" />
-              <StatBar label="MYTHIC RESIDUE" value={store.mythic_residue} colorClass="bg-[#8C4EFF]" />
+              <StatBar label="DISSOLUTION INDEX"   value={store.dissolution_index}   colorClass="bg-[#FFB000]"   highValueColorClass="bg-[#8C4EFF]" />
+              <StatBar label="EFFICIENCY RATING"   value={store.efficiency_score}    colorClass="bg-[#00B8B0]" />
+              <StatBar label="REALITY STABILITY"   value={store.reality_stability}   colorClass="bg-[#F5EDE0]" />
+              <StatBar label="MYTHIC RESIDUE"      value={store.mythic_residue}      colorClass="bg-[#8C4EFF]" />
               <StatBar label="NARRATIVE STABILITY" value={store.narrative_stability} colorClass="bg-[#00B8B0]" />
             </div>
 
@@ -110,11 +169,13 @@ export function EndOfDayScreen() {
               <div className="mb-8">
                 <p className="text-xs tracking-widest opacity-40 mb-3">ACTIVE FLAGS</p>
                 <div className="flex flex-wrap gap-2">
-                  {Object.keys(store.flags).filter(k => store.flags[k]).map((flag) => (
-                    <span key={flag} className="text-xs border border-[#FFB000]/30 px-2 py-0.5 opacity-60">
-                      {flag}
-                    </span>
-                  ))}
+                  {Object.keys(store.flags)
+                    .filter((k) => store.flags[k])
+                    .map((flag) => (
+                      <span key={flag} className="text-xs border border-[#FFB000]/30 px-2 py-0.5 opacity-60">
+                        {flag}
+                      </span>
+                    ))}
                 </div>
               </div>
             )}
@@ -123,7 +184,7 @@ export function EndOfDayScreen() {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 1.2 }}
+                transition={{ delay: 1.5 }}
                 onAnimationComplete={() => setPhase('complete')}
               />
             )}

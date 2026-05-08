@@ -1,28 +1,29 @@
 import { useGameStore } from './store/gameStore';
-import { BootScreen } from './screens/BootScreen';
-import { TerminalScreen } from './screens/TerminalScreen';
-import { CaseFormScreen } from './screens/CaseFormScreen';
-import { EndOfDayScreen } from './screens/EndOfDayScreen';
+import { BootScreen }      from './screens/BootScreen';
+import { TerminalScreen }  from './screens/TerminalScreen';
+import { CaseFormScreen }  from './screens/CaseFormScreen';
+import { EndOfDayScreen }  from './screens/EndOfDayScreen';
 import { PlayerFileScreen } from './screens/PlayerFileScreen';
-import { EndingScreen } from './screens/EndingScreen';
-import { Background } from './components/Background';
-import { CRTOverlay } from './components/CRTOverlay';
+import { EndingScreen }    from './screens/EndingScreen';
+import { Background }      from './components/Background';
+import { CRTOverlay }      from './components/CRTOverlay';
 
 export default function App() {
-  const gamePhase = useGameStore((state) => state.game_phase);
+  const gamePhase        = useGameStore((s) => s.game_phase);
+  const dissolution_index = useGameStore((s) => s.dissolution_index);
 
   return (
     <>
-      <Background />
-      <CRTOverlay />
-      
+      <Background dissolution_index={dissolution_index} />
+      <CRTOverlay dissolution_index={dissolution_index} />
+
       <div className="relative z-10 w-full h-full">
-        {gamePhase === 'boot' && <BootScreen />}
-        {gamePhase === 'terminal' && <TerminalScreen />}
-        {gamePhase === 'case' && <CaseFormScreen />}
-        {gamePhase === 'end_of_day' && <EndOfDayScreen />}
+        {gamePhase === 'boot'        && <BootScreen />}
+        {gamePhase === 'terminal'    && <TerminalScreen />}
+        {gamePhase === 'case'        && <CaseFormScreen />}
+        {gamePhase === 'end_of_day'  && <EndOfDayScreen />}
         {gamePhase === 'player_file' && <PlayerFileScreen />}
-        {gamePhase === 'ending' && <EndingScreen />}
+        {gamePhase === 'ending'      && <EndingScreen />}
       </div>
     </>
   );

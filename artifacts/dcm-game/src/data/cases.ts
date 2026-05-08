@@ -9,8 +9,17 @@ export const allCases: Case[] = [
   ...(day3Raw.cases as Case[]),
 ];
 
-export function getCasesForDay(day: number): Case[] {
-  return allCases.filter((c) => c.day === day);
+export function getCasesForDay(
+  day: number,
+  clearanceLevel?: number,
+  flags?: Record<string, boolean>
+): Case[] {
+  return allCases.filter((c) => {
+    if (c.day !== day) return false;
+    if (clearanceLevel !== undefined && c.clearance_required > clearanceLevel) return false;
+    if (flags !== undefined && c.requires_flag !== '' && !flags[c.requires_flag]) return false;
+    return true;
+  });
 }
 
 export function getCaseById(id: string): Case | undefined {

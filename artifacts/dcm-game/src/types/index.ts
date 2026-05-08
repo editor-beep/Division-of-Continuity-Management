@@ -21,6 +21,16 @@ export interface Ripple {
   delayed_effects?: Record<string, number>;
 }
 
+export interface StatSnapshot {
+  dissolution_index: number;
+  efficiency_score: number;
+  mythic_residue: number;
+  narrative_stability: number;
+  emotional_surplus: number;
+  reality_stability: number;
+  department_strain: number;
+}
+
 export interface GameState {
   dissolution_index: number;
   efficiency_score: number;
@@ -41,12 +51,14 @@ export interface GameState {
   daily_cases_processed: number;
   completed_cases: string[];
   deferred_cases: string[];
+  rejected_cases: string[];
   flags: Record<string, boolean>;
   pending_ripples: Ripple[];
   game_phase: GamePhase;
   active_ending: string | null;
   active_case_id: string | null;
   echo_interactions: number;
+  play_count: number;
 
   completeCase: (
     caseId: string,
@@ -54,6 +66,7 @@ export interface GameState {
     flags_to_set: string[],
     ripples: Ripple[]
   ) => void;
+  rejectCase: (caseId: string) => void;
   deferCase: (caseId: string) => void;
   applyStat: (key: NumericStatKey, delta: number) => void;
   setFlag: (key: string, value?: boolean) => void;
@@ -66,6 +79,7 @@ export interface GameState {
   resetGame: () => void;
   setGamePhase: (phase: GamePhase) => void;
   setActiveCase: (caseId: string | null) => void;
+  snapshotStats: () => StatSnapshot;
 }
 
 export interface WorkerUnit {

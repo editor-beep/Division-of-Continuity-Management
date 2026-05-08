@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { GameState, NumericStatKey, Ripple } from '../types';
+import { GameState, NumericStatKey, Ripple, StatSnapshot } from '../types';
 
 const CLAMP: Record<NumericStatKey, [number, number]> = {
   dissolution_index:        [0,   100],
@@ -53,7 +53,7 @@ function applyEffects(
   return patch;
 }
 
-const initialState = {
+const INITIAL_NUMERIC = {
   dissolution_index:        4.2,
   efficiency_score:         65.0,
   continuity_contribution:  0,
@@ -66,18 +66,26 @@ const initialState = {
   unraveling_events:        0,
   mythic_commodities_index: 100.0,
   collective_nostalgia:     45.0,
-  era:                      'Act1' as const,
-  current_day:              1,
-  daily_cases_processed:    0,
-  completed_cases:          [] as string[],
-  deferred_cases:           [] as string[],
-  flags:                    {} as Record<string, boolean>,
-  pending_ripples:          [] as Ripple[],
-  game_phase:               'boot' as const,
-  active_ending:            null as string | null,
-  active_case_id:           null as string | null,
-  echo_interactions:        0,
 };
+
+const initialState = {
+  ...INITIAL_NUMERIC,
+  era:                   'Act1' as const,
+  current_day:           1,
+  daily_cases_processed: 0,
+  completed_cases:       [] as string[],
+  deferred_cases:        [] as string[],
+  rejected_cases:        [] as string[],
+  flags:                 {} as Record<string, boolean>,
+  pending_ripples:       [] as Ripple[],
+  game_phase:            'boot' as const,
+  active_ending:         null as string | null,
+  active_case_id:        null as string | null,
+  echo_interactions:     0,
+  play_count:            0,
+};
+
+const ECHO_CASE_IDS = ['case_005', 'case_010', 'case_015'];
 
 export const useGameStore = create<GameState>()(
   persist(
@@ -86,7 +94,7 @@ export const useGameStore = create<GameState>()(
 
       applyStat: (key: NumericStatKey, delta: number) =>
         set((state) => ({
-          [key]: clamp(key, state[key] as number + delta),
+          [key]: clamp(key, (state[key] as number) + delta),
         })),
 
       setFlag: (key: string, value = true) =>
@@ -97,30 +105,71 @@ export const useGameStore = create<GameState>()(
       queueRipple: (ripple: Ripple) =>
         set((state) => ({ pending_ripples: [...state.pending_ripples, ripple] })),
 
+      snapshotStats: (): StatSnapshot => {
+        const s = get();
+        return {
+          dissolution_index:   s.dissolution_index,
+          efficiency_score:    s.efficiency_score,
+          mythic_residue:      s.mythic_residue,
+          narrative_stability: s.narrative_stability,
+          emotional_surplus:   s.emotional_surplus,
+          reality_stability:   s.reality_stability,
+          department_strain:   s.department_strain,
+        };
+      },
+
       evaluateEnding: (): string => {
         const s = get();
-        const echoIds = ['case_005', 'case_010', 'case_015'];
-        const echoCount = echoIds.filter((id) => s.completed_cases.includes(id)).length;
+        const echoCompleted = ECHO_CASE_IDS.filter((id) =>
+          s.completed_cases.includes(id)
+        ).length;
 
-        if (s.efficiency_score <= 25 && s.reality_stability <= 30 && s.unraveling_events >= 3)
-          return 'the_unraveling';
-        if (s.flags['echo_awareness'] && (echoCount >= 2 || s.echo_interactions >= 2))
-          return 'echo_loop';
+        // Priority 1: THE UNRAVELING — total systemic collapse
+        if (
+          s.efficiency_score <= 25 &&
+          s.reality_stability <= 30 &&
+          s.unraveling_events >= 3
+        ) return 'the_unraveling';
+
+        // Priority 2: ECHO LOOP — must have awareness + all 3 echo cases processed
+        if (
+          s.flags['echo_awareness'] &&
+          echoCompleted >= 3 &&
+          s.echo_interactions >= 3
+        ) return 'echo_loop';
+
+        // Priority 3: MYTHIC ASCENSION — exceeded mythic thresholds
         if (s.mythic_residue >= 70 && s.dissolution_index >= 40)
           return 'mythic_ascension';
+
+        // Priority 4: SYSTEM FRACTURE — structural breakdown
         if (s.department_strain >= 70 && s.unraveling_events >= 5)
           return 'system_fracture';
-        if (s.dissolution_index >= 75 && s.efficiency_score >= 85 && s.mythic_residue <= 40)
-          return 'optimal_assimilation';
+
+        // Priority 5: OPTIMAL ASSIMILATION — perfectly efficient dissolution
+        if (
+          s.dissolution_index >= 75 &&
+          s.efficiency_score >= 85 &&
+          s.mythic_residue <= 40
+        ) return 'optimal_assimilation';
+
+        // Priority 6: QUIET REBELLION — emotional resistance despite compliance
         if (s.emotional_surplus >= 20 && s.efficiency_score <= 55)
           return 'quiet_rebellion';
+
+        // Priority 7: MERCIFUL ERASURE — sacrifice for others
         if (s.emotional_surplus >= 30 && s.flags['mercy_override_used'])
           return 'merciful_erasure';
+
+        // Priority 8: CO-CREATOR — balanced dissolution + echo engagement + NG+ or
+        // broad conditions (dissolution in [45-70], efficiency in [55-80], echo_awareness)
         if (
           s.dissolution_index >= 45 && s.dissolution_index <= 70 &&
-          s.efficiency_score >= 55 && s.efficiency_score <= 80
-        )
-          return 'co_creator';
+          s.efficiency_score >= 55 && s.efficiency_score <= 80 &&
+          (s.flags['echo_awareness'] || s.play_count >= 1)
+        ) return 'co_creator';
+
+        // Default fallback
         return 'quiet_rebellion';
       },
 
@@ -134,9 +183,7 @@ export const useGameStore = create<GameState>()(
           const newFlags: Record<string, boolean> = { ...state.flags };
           for (const key of flags_to_set) newFlags[key] = true;
 
-          const isEchoCase =
-            caseId === 'case_005' || caseId === 'case_010' || caseId === 'case_015';
-
+          const isEchoCase = ECHO_CASE_IDS.includes(caseId);
           const nextDeptStrain = statPatch.department_strain ?? state.department_strain;
           const triggersUnravel = nextDeptStrain >= 60 && state.department_strain < 60;
 
@@ -145,6 +192,7 @@ export const useGameStore = create<GameState>()(
             flags: newFlags,
             pending_ripples: [...state.pending_ripples, ...ripples],
             completed_cases: [...state.completed_cases, caseId],
+            rejected_cases:  state.rejected_cases.filter((id) => id !== caseId),
             deferred_cases:  state.deferred_cases.filter((id) => id !== caseId),
             daily_cases_processed: state.daily_cases_processed + 1,
             echo_interactions: isEchoCase
@@ -153,6 +201,33 @@ export const useGameStore = create<GameState>()(
             unraveling_events: triggersUnravel
               ? state.unraveling_events + 1
               : state.unraveling_events,
+          };
+        }),
+
+      rejectCase: (caseId: string) =>
+        set((state) => {
+          if (state.completed_cases.includes(caseId)) return state;
+          const base = getNumeric(state);
+          const statPatch = applyEffects(base, {
+            efficiency_score:   -8.0,
+            emotional_surplus:   5.0,
+            reality_stability:   2.0,
+            department_strain:   5.0,
+          });
+          const alreadyRejected = state.rejected_cases.includes(caseId);
+          return {
+            ...statPatch,
+            rejected_cases: alreadyRejected
+              ? state.rejected_cases
+              : [...state.rejected_cases, caseId],
+            deferred_cases: state.deferred_cases.filter((id) => id !== caseId),
+            pending_ripples: [
+              ...state.pending_ripples,
+              {
+                type: 'medium' as const,
+                text: 'A rejection has been filed. The Continuum notes the refusal. It is, in its way, also a contribution.',
+              },
+            ],
           };
         }),
 
@@ -189,7 +264,11 @@ export const useGameStore = create<GameState>()(
       triggerEnding: (endingId: string) =>
         set({ active_ending: endingId, game_phase: 'ending' }),
 
-      resetGame: () => set({ ...initialState }),
+      resetGame: () =>
+        set((state) => ({
+          ...initialState,
+          play_count: state.play_count + 1,
+        })),
 
       setGamePhase: (phase) => set({ game_phase: phase }),
 

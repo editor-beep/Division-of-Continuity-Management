@@ -10,24 +10,27 @@ export function TerminalScreen() {
   const store = useGameStore();
   const [greetingComplete, setGreetingComplete] = useState(false);
 
-  const todayCases = useMemo(() => getCasesForDay(store.current_day), [store.current_day]);
-
   const availableCases = useMemo(
-    () =>
-      todayCases.filter(
-        (c) => c.requires_flag === '' || store.hasFlag(c.requires_flag)
-      ),
-    [todayCases, store.flags]
+    () => getCasesForDay(store.current_day, store.clearance_level, store.flags),
+    [store.current_day, store.clearance_level, store.flags]
   );
 
-  const allAvailableComplete = availableCases.every((c) =>
-    store.completed_cases.includes(c.id)
+  const lockedCases = useMemo(
+    () => getCasesForDay(store.current_day).filter(
+      (c) => c.clearance_required > store.clearance_level ||
+             (c.requires_flag !== '' && !store.flags[c.requires_flag])
+    ),
+    [store.current_day, store.clearance_level, store.flags]
+  );
+
+  const allProcessed = availableCases.every(
+    (c) => store.completed_cases.includes(c.id) ||
+           store.rejected_cases.includes(c.id)
   );
 
   const getGreeting = () => {
-    if (store.current_day === 3 && store.dissolution_index >= 50) {
+    if (store.current_day === 3 && store.dissolution_index >= 50)
       return SYSTEM_VOICE.GREETING.DAY3_HIGH_DISSOLUTION;
-    }
     if (store.current_day === 1) return SYSTEM_VOICE.GREETING.DAY1;
     if (store.current_day === 2) return SYSTEM_VOICE.GREETING.DAY2;
     return SYSTEM_VOICE.GREETING.DAY3;
@@ -35,17 +38,19 @@ export function TerminalScreen() {
 
   const getCaseStatus = (caseId: string) => {
     if (store.completed_cases.includes(caseId)) return 'complete';
-    if (store.deferred_cases.includes(caseId)) return 'deferred';
+    if (store.rejected_cases.includes(caseId))  return 'rejected';
+    if (store.deferred_cases.includes(caseId))  return 'deferred';
     return 'pending';
   };
 
-  const handleCaseSelect = (caseId: string, locked: boolean) => {
-    if (locked) return;
+  const handleCaseSelect = (caseId: string) => {
     const status = getCaseStatus(caseId);
-    if (status === 'complete') return;
+    if (status === 'complete' || status === 'rejected') return;
     store.setActiveCase(caseId);
     store.setGamePhase('case');
   };
+
+  const allCasesForDisplay = [...availableCases, ...lockedCases];
 
   return (
     <div className="min-h-screen p-6 font-mono text-[#FFB000] flex flex-col lg:flex-row gap-6 max-w-6xl mx-auto">
@@ -75,10 +80,11 @@ export function TerminalScreen() {
             <h2 className="text-base tracking-[0.2em] mb-5 opacity-70">[ ACTIVE QUEUE ]</h2>
 
             <div className="flex flex-col gap-3">
-              {availableCases.map((c) => {
-                const isLocked = c.clearance_required > store.clearance_level;
+              {allCasesForDisplay.map((c) => {
+                const isLocked = c.clearance_required > store.clearance_level ||
+                  (c.requires_flag !== '' && !store.flags[c.requires_flag]);
                 const status = getCaseStatus(c.id);
-                const isEchoCase = c.worker_unit.name.toLowerCase().includes('echo');
+                const isEchoCase = c.id === 'case_005' || c.id === 'case_010' || c.id === 'case_015';
 
                 let statusLabel = '[ PENDING ]';
                 let statusClass = 'text-[#FFB000]';
@@ -88,12 +94,18 @@ export function TerminalScreen() {
                   statusLabel = '[ FILED ]';
                   statusClass = 'text-[#00B8B0] opacity-40';
                   borderClass = 'border-[#00B8B0]/10';
+                } else if (status === 'rejected') {
+                  statusLabel = '[ REJECTED ]';
+                  statusClass = 'text-[#5C0010] opacity-60';
+                  borderClass = 'border-[#5C0010]/20';
                 } else if (status === 'deferred') {
                   statusLabel = '[ DEFERRED ]';
                   statusClass = 'text-[#8C4EFF] opacity-60';
                   borderClass = 'border-[#8C4EFF]/20';
                 } else if (isLocked) {
-                  statusLabel = `[ CLEARANCE Θ-${c.clearance_required} REQ ]`;
+                  statusLabel = c.requires_flag
+                    ? '[ FLAG REQUIRED ]'
+                    : `[ CLEARANCE Θ-${c.clearance_required} REQ ]`;
                   statusClass = 'text-[#5C0010]/60';
                   borderClass = 'border-[#5C0010]/10';
                 } else if (isEchoCase) {
@@ -102,16 +114,17 @@ export function TerminalScreen() {
                   borderClass = 'border-[#8C4EFF]/30';
                 }
 
-                const clickable = !isLocked && status !== 'complete';
+                const clickable = !isLocked && status !== 'complete' && status !== 'rejected';
 
                 return (
                   <button
                     key={c.id}
-                    onClick={() => handleCaseSelect(c.id, isLocked)}
+                    onClick={() => clickable && handleCaseSelect(c.id)}
                     disabled={!clickable}
                     className={`text-left p-4 border ${borderClass} transition-all flex flex-col gap-1.5
-                      ${clickable ? 'cursor-pointer hover:bg-[#FFB000]/5 hover:border-[#FFB000]/50' : 'cursor-not-allowed'}
-                    `}
+                      ${clickable
+                        ? 'cursor-pointer hover:bg-[#FFB000]/5 hover:border-[#FFB000]/50'
+                        : 'cursor-not-allowed opacity-60'}`}
                     data-testid={`case-item-${c.id}`}
                   >
                     <div className="flex justify-between items-start gap-2">
@@ -120,7 +133,9 @@ export function TerminalScreen() {
                       </span>
                       <span className={`text-xs shrink-0 ${statusClass}`}>{statusLabel}</span>
                     </div>
-                    <div className="text-xs opacity-60">{c.issue.substring(0, 80)}{c.issue.length > 80 ? '…' : ''}</div>
+                    <div className="text-xs opacity-60">
+                      {c.issue.substring(0, 80)}{c.issue.length > 80 ? '…' : ''}
+                    </div>
                     <div className="text-xs opacity-40 mt-1">
                       UNIT {c.worker_unit.id} · {c.worker_unit.name}
                     </div>
@@ -129,7 +144,7 @@ export function TerminalScreen() {
               })}
             </div>
 
-            {allAvailableComplete && (
+            {allProcessed && availableCases.length > 0 && (
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -161,39 +176,21 @@ export function TerminalScreen() {
                 CLEARANCE Θ-{store.clearance_level}
               </span>
             </div>
-
             <div className="flex flex-col gap-5">
-              <StatBar
-                label="DISSOLUTION INDEX"
-                value={store.dissolution_index}
-                colorClass="bg-[#FFB000]"
-                highValueColorClass="bg-[#8C4EFF]"
-              />
-              <StatBar
-                label="EFFICIENCY RATING"
-                value={store.efficiency_score}
-                colorClass="bg-[#00B8B0]"
-              />
-              <StatBar
-                label="REALITY STABILITY"
-                value={store.reality_stability}
-                colorClass="bg-[#F5EDE0]"
-              />
-              <StatBar
-                label="MYTHIC RESIDUE"
-                value={store.mythic_residue}
-                colorClass="bg-[#8C4EFF]"
-              />
+              <StatBar label="DISSOLUTION INDEX" value={store.dissolution_index} colorClass="bg-[#FFB000]"  highValueColorClass="bg-[#8C4EFF]" />
+              <StatBar label="EFFICIENCY RATING" value={store.efficiency_score}  colorClass="bg-[#00B8B0]" />
+              <StatBar label="REALITY STABILITY" value={store.reality_stability} colorClass="bg-[#F5EDE0]" />
+              <StatBar label="MYTHIC RESIDUE"    value={store.mythic_residue}    colorClass="bg-[#8C4EFF]" />
             </div>
-
             <div className="mt-5 pt-4 border-t border-[#FFB000]/20 text-xs space-y-2 opacity-60">
               <div className="flex justify-between">
-                <span>CASES FILED</span>
-                <span>{store.completed_cases.length}</span>
+                <span>FILED</span><span>{store.completed_cases.length}</span>
               </div>
               <div className="flex justify-between">
-                <span>DEPT. STRAIN</span>
-                <span>{store.department_strain.toFixed(1)}</span>
+                <span>REJECTED</span><span>{store.rejected_cases.length}</span>
+              </div>
+              <div className="flex justify-between">
+                <span>DEPT. STRAIN</span><span>{store.department_strain.toFixed(1)}</span>
               </div>
             </div>
           </div>
