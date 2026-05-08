@@ -1,0 +1,10 @@
+entrypoint = "README.md"
+run = "./scripts/replit_run.sh"
+
+[nix]
+channel = "stable-24_05"
+packages = ["godot_4", "python311"]
+
+[deployment]
+run = ["sh", "-lc", "./scripts/replit_run.sh"]
+deploymentTarget = "static"
