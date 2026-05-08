@@ -1,0 +1,15 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #0A0A0F;
+  color: #FFB000;
+  font-family: 'Courier New', Courier, monospace;
+  min-height: 100vh;
+}

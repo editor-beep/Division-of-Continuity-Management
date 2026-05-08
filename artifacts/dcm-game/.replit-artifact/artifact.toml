@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Division of Continuity Management"
+version = "1.0.0"
+id = "artifacts/dcm-game"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18408
+
+[services.development]
+run = "pnpm --filter @workspace/dcm-game run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/dcm-game", "run", "build" ]
+publicDir = "artifacts/dcm-game/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18408"
+BASE_PATH = "/"
