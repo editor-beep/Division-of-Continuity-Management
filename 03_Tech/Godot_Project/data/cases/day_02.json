@@ -50,6 +50,7 @@
                   "id": "elevation_opportunity",
                   "label": "Opportunity for elevation to Minor Archetype",
                   "sublabel": "high risk, high reward",
+                  "resource_requirements": { "mythic_commodities_index": 60 },
                   "effects": { "mythic_commodities_index": 8.0, "dissolution_index": 2.0, "reality_stability": -1.0 },
                   "flags_set": ["marcus_elevated"],
                   "ripples": [{ "type": "major", "text": "Worker-Unit E-7742's geometric dreaming has been classified as Minor Archetype potential. The Mythic Commodities Division is very interested.", "delayed_effects": { "collective_nostalgia": 3.0 } }]
@@ -92,6 +93,7 @@
                 {
                   "id": "elevate_mythic",
                   "label": "Elevate to Mythic Commodities Division (requires your sign-off)",
+                  "resource_requirements": { "mythic_commodities_index": 80 },
                   "effects": { "mythic_commodities_index": 15.0, "dissolution_index": 3.0, "continuity_contribution": 20.0 },
                   "flags_set": ["marcus_mythic"],
                   "ripples": [{ "type": "major", "text": "Worker-Unit E-7742 has been formally elevated. He is no longer just a person. He is, in a small but real way, a recurring dream. The trains have become sacred.", "delayed_effects": { "collective_nostalgia": 5.0, "reality_stability": -2.0 } }]
@@ -121,7 +123,7 @@
         "occupation": "Visual Artist (Elena Voss's younger sister)"
       },
       "issue": "High creative output but dangerously unstable personal mythology. Her latest series depicts 'glowing terminals watching people sleep.'",
-      "system_note": "True artists carry more reality than they realize. Handle with precision and care.",
+      "system_note": "True artists carry more reality than they realize. Handle with precision and care. [PROCESSOR WELLNESS NOTE: Your dissolution index currently reads {dissolution_index}. Processors above 15.0 show heightened pattern sensitivity in artistic cases. This is noted, not judged.]",
       "sections": [
         {
           "id": "section_a",
@@ -150,6 +152,7 @@
                 {
                   "id": "sacred_visionary",
                   "label": "Elevated to Sacred Visionary status (risk of contagion)",
+                  "resource_requirements": { "mythic_commodities_index": 70 },
                   "effects": { "mythic_residue": 8.0, "mythic_commodities_index": 5.0, "reality_stability": -2.0 },
                   "flags_set": ["liora_visionary"],
                   "ripples": [{ "type": "major", "text": "Artist I-2291 has been elevated to provisional Sacred Visionary status. Her next exhibition is expected to cause minor ontological disturbances.", "delayed_effects": { "department_strain": 3.0 } }]
@@ -157,6 +160,12 @@
                 {
                   "id": "national_morale",
                   "label": "Redirect surplus to national morale campaigns",
+                  "suppression_conditions": [
+                    {
+                      "flag": "elena_memories_redacted",
+                      "message": "Voss family morale channel unavailable — creative lineage has been redacted from the public archive. Her sister's story cannot anchor this campaign."
+                    }
+                  ],
                   "effects": { "collective_nostalgia": 8.0, "efficiency_score": 5.0, "dissolution_index": 0.5 },
                   "flags_set": [],
                   "ripples": [{ "type": "medium", "text": "Approved artistic surplus routed to national morale division. Posters are already in production.", "delayed_effects": {} }]
@@ -227,7 +236,7 @@
         "age": 41,
         "occupation": "Logistics Coordinator"
       },
-      "issue": "After yesterday's compression, his children are exhibiting minor narrative instability. One child now draws 'the nice voice in the computer.'",
+      "issue": "After yesterday's compression, his children are exhibiting minor narrative instability. One child now draws 'the nice voice in the computer.' [PROCESSOR FILE REFERENCE: Dissolution index at {dissolution_index}. Processors at this level may experience heightened resonance with domestic cases. This is expected. This is fine.]",
       "system_note": "The threads between generations are delicate. What we compress in one place often blooms elsewhere.",
       "sections": [
         {
@@ -264,6 +273,14 @@
                 {
                   "id": "partial_restoration",
                   "label": "Offer Theo a partial restoration of his own childhood (personal cost to you)",
+                  "suppression_conditions": [
+                    {
+                      "flag": "theo_childhood_compressed",
+                      "stat_above": "dissolution_index",
+                      "value": 55.0,
+                      "message": "Restoration pathway unavailable — Processor dissolution at {dissolution_index}. At this level, your file can no longer hold the weight of returning something without losing something else."
+                    }
+                  ],
                   "effects": { "emotional_surplus": 6.0, "dissolution_index": -1.0, "efficiency_score": -3.0 },
                   "flags_set": ["theo_partial_restoration"],
                   "ripples": [{ "type": "major", "text": "A partial restoration of Theo Arlen's wonder archive has been approved at personal cost. He paused at his desk today, inexplicably, and smiled. The children noticed.", "delayed_effects": { "narrative_stability": 3.0 } }]
@@ -402,7 +419,7 @@
         "occupation": "Unclassified"
       },
       "issue": "File strongly resembles your own Day 1 intake record. The metadata is dated tomorrow.",
-      "system_note": "We have been thinking about you as well, Processor. The Ledger grows more intimate with each shift.",
+      "system_note": "We have been thinking about you as well, Processor. The Ledger grows more intimate with each shift. [Your dissolution index is currently {dissolution_index}. We find it beautiful.]",
       "sections": [
         {
           "id": "section_a",

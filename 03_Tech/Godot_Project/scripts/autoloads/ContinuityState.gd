@@ -4,6 +4,12 @@
 ## All variable names map directly to State_Schema.json.
 extends Node
 
+# Resources that cases compete for within a single day.
+# Keyed by stat name; value is the snapshot taken at day-start.
+# Live depletion is tracked via the actual stats — this snapshot
+# lets us show how much has been consumed since morning.
+const COMPETITIVE_RESOURCES := ["collective_nostalgia", "mythic_commodities_index"]
+
 # ── Player State ──────────────────────────────────────────────────────────────
 
 var dissolution_index: float = 4.2
@@ -77,10 +83,19 @@ const STAT_RANGES := {
 
 var _crossed_thresholds: Array = []
 
+# ── Per-Day Resource Snapshot ─────────────────────────────────────────────────
+# Captured at day-start so cases can see how much pool has been consumed.
+var daily_resource_snapshot: Dictionary = {}
+
+# ── Character Choice History ──────────────────────────────────────────────────
+# Keyed by worker-unit ID (e.g. "E-7742").
+# Each entry: Array of { day: int, case_id: String, choices: { field_id: option_id } }
+var character_history: Dictionary = {}
+
 # ── Lifecycle ─────────────────────────────────────────────────────────────────
 
 func _ready() -> void:
-	pass
+	snapshot_daily_resources()
 
 # ── Public API ────────────────────────────────────────────────────────────────
 
@@ -160,7 +175,36 @@ func advance_day() -> void:
 	daily_cases_processed = 0
 	daily_efficiency = 0.0
 	_update_clearance_level()
+	snapshot_daily_resources()
 	SaveSystem.save_game()
+
+## Snapshot the competitive resource pools at the start of each day.
+## Used by FormField to check availability before rendering options.
+func snapshot_daily_resources() -> void:
+	for res in COMPETITIVE_RESOURCES:
+		daily_resource_snapshot[res] = get(res) if get(res) != null else 0.0
+
+## Return the current live value of a resource stat (for availability checks).
+func get_resource_remaining(resource: String) -> float:
+	var val = get(resource)
+	return float(val) if val != null else 0.0
+
+## Record the choices made for a worker-unit case (for Thread View).
+## choices is a dict of { field_id: option_id }.
+func record_character_choice(char_id: String, case_id: String, choices: Dictionary) -> void:
+	if char_id == "" or char_id.begins_with("███"):
+		return
+	if char_id not in character_history:
+		character_history[char_id] = []
+	character_history[char_id].append({
+		"day":     current_day,
+		"case_id": case_id,
+		"choices": choices.duplicate(),
+	})
+
+## Return the full history array for a given worker-unit ID.
+func get_character_history(char_id: String) -> Array:
+	return character_history.get(char_id, [])
 
 ## Snapshot of all numeric stats for UI display and ending evaluation.
 func get_all_stats() -> Dictionary:
@@ -214,6 +258,10 @@ func to_dict() -> Dictionary:
 			"completed_cases": completed_cases.duplicate(),
 			"pending_ripples": pending_ripples.duplicate(true),
 		},
+		"history": {
+			"character_history":       character_history.duplicate(true),
+			"daily_resource_snapshot": daily_resource_snapshot.duplicate(),
+		},
 	}
 
 ## Full deserialisation from save file data.
@@ -246,6 +294,12 @@ func from_dict(data: Dictionary) -> void:
 	daily_cases_processed  = s.get("daily_cases_processed",  0)
 	completed_cases        = s.get("completed_cases",        [])
 	pending_ripples        = s.get("pending_ripples",        [])
+
+	var h: Dictionary = data.get("history", {})
+	character_history       = h.get("character_history",       {})
+	daily_resource_snapshot = h.get("daily_resource_snapshot", {})
+	if daily_resource_snapshot.is_empty():
+		snapshot_daily_resources()
 
 	# Re-emit all stats so bound UI refreshes
 	for key in STAT_RANGES:
