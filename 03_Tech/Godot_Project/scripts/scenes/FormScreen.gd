@@ -2,10 +2,18 @@
 ## The heart of the game. Renders the current case as an interactive form.
 ## Dynamically builds form fields from case JSON data.
 ## Applies effects to ContinuityState on submission.
+##
+## New capabilities:
+##   - Thread View: return cases show a prior-choices timeline above the form.
+##   - Choice Recording: field selections recorded per worker-unit for thread history.
+##   - Contradiction Voice: case_016 (Θ-PIR) triggers escalating System voice.
 extends Control
 
 const TERMINAL_SCENE   := "res://scenes/terminal/MainTerminal.tscn"
 const FORM_FIELD_SCENE := "res://scenes/components/FormField.tscn"
+
+# The contradiction audit case — gets special voice treatment
+const CONTRADICTION_CASE_ID := "case_016"
 
 # ── Node References ───────────────────────────────────────────────────────────
 @onready var employee_id_label: Label       = $TopBar/TopBarLayout/EmployeeIdLabel
@@ -28,15 +36,20 @@ const FORM_FIELD_SCENE := "res://scenes/components/FormField.tscn"
 
 # ── State ─────────────────────────────────────────────────────────────────────
 var _case_data: Dictionary = {}
-var _form_fields: Array = []       # Array of FormField instances
+var _form_fields: Array = []
 var _accumulated_effects: Dictionary = {}
 var _accumulated_ripples: Array = []
 var _form_field_scene: PackedScene = null
 
+# Per-field choice tracking for Thread View history recording
+var _field_choices: Dictionary = {}
+
+# Contradiction voice escalation state
+var _contradiction_voice_stage: int = 0
+
 func _ready() -> void:
 	_form_field_scene = load(FORM_FIELD_SCENE)
 
-	# Apply shaders
 	var crt_mat := ShaderMaterial.new()
 	crt_mat.shader = load("res://shaders/crt.gdshader")
 	if crt_mat.shader:
@@ -70,12 +83,10 @@ func _load_case() -> void:
 	_render_case()
 
 func _render_case() -> void:
-	# Top bar
 	employee_id_label.text = "PROCESSOR  ████████-Θ-%d" % ContinuityState.clearance_level
 	clearance_label.text   = "CLEARANCE Θ-%d"           % ContinuityState.clearance_level
 	dissolution_bar.value  = ContinuityState.dissolution_index
 
-	# Worker unit info
 	var wu: Dictionary = _case_data.get("worker_unit", {})
 	worker_info_label.bbcode_enabled = true
 	worker_info_label.text = (
@@ -84,52 +95,54 @@ func _render_case() -> void:
 			wu.get("name", "REDACTED"),
 			wu.get("occupation", ""),
 			str(wu.get("age", "")),
-			_case_data.get("issue", ""),
+			_process_template(_case_data.get("issue", "")),
 		]
 	)
 	worker_portrait.color = _portrait_color_for_case()
 
-	# Form header
 	form_type_label.text  = "FORM %s" % _case_data.get("form_type", "")
 	form_title_label.text = _case_data.get("form_title", _case_data.get("title", ""))
 	issue_label.bbcode_enabled = true
-	issue_label.text = _case_data.get("issue", "")
+	issue_label.text = _process_template(_case_data.get("issue", ""))
 
-	# System note
-	var note: String = _case_data.get("system_note", "")
+	var note: String = _process_template(_case_data.get("system_note", ""))
 	system_note_label.bbcode_enabled = true
 	system_note_label.text = '[i][color=#FFB000]System Note: "%s"[/color][/i]' % note if note != "" else ""
 
-	# Build form fields
 	_build_fields()
 
-	# System voice intro
-	system_voice_label.bbcode_enabled = true
-	system_voice_label.text = "[color=#F5EDE0][i]Take your time. The correct classification will feel like remembering something you already knew.[/i][/color]"
+	# Contradiction case gets a special opening voice
+	if _case_data.get("id", "") == CONTRADICTION_CASE_ID:
+		_set_contradiction_voice(0)
+	else:
+		system_voice_label.bbcode_enabled = true
+		system_voice_label.text = "[color=#F5EDE0][i]Take your time. The correct classification will feel like remembering something you already knew.[/i][/color]"
 
-	# Initial button states
 	_update_approve_state()
 
 func _build_fields() -> void:
 	for child in fields_container.get_children():
 		child.queue_free()
 	_form_fields.clear()
+	_field_choices.clear()
 
 	if _form_field_scene == null:
 		return
 
+	# Thread View: show prior decisions for return cases
+	if _case_data.get("is_return_case", false):
+		_build_thread_view()
+
 	var sections: Array = _case_data.get("sections", [])
 	for section: Dictionary in sections:
-		# Section title
 		var sec_lbl := Label.new()
 		sec_lbl.text = section.get("title", "")
-		sec_lbl.add_theme_color_override("font_color", Color(1.0, 0.69, 0.0, 1.0))  # Amber
+		sec_lbl.add_theme_color_override("font_color", Color(1.0, 0.69, 0.0, 1.0))
 		fields_container.add_child(sec_lbl)
 
 		var sep := HSeparator.new()
 		fields_container.add_child(sep)
 
-		# Fields in this section
 		for field_data: Dictionary in section.get("fields", []):
 			var ff = _form_field_scene.instantiate()
 			ff.setup(field_data)
@@ -137,8 +150,68 @@ func _build_fields() -> void:
 			fields_container.add_child(ff)
 			_form_fields.append(ff)
 
+# ── Thread View ───────────────────────────────────────────────────────────────
+
+func _build_thread_view() -> void:
+	var char_id: String = _case_data.get("worker_unit", {}).get("id", "")
+	if char_id == "" or char_id.begins_with("███"):
+		return
+
+	var history: Array = ContinuityState.get_character_history(char_id)
+	if history.is_empty():
+		return
+
+	var char_name: String = _case_data.get("worker_unit", {}).get("name", "REDACTED")
+
+	var header := RichTextLabel.new()
+	header.bbcode_enabled = true
+	header.fit_content = true
+	header.text = "[color=#007DB8]── THREAD RECORD: %s / %s ──[/color]" % [char_id, char_name]
+	fields_container.add_child(header)
+
+	for entry: Dictionary in history:
+		var prior: Dictionary = CaseLoader.get_case_by_id(entry.get("case_id", ""))
+		if prior.is_empty():
+			continue
+
+		var entry_rtl := RichTextLabel.new()
+		entry_rtl.bbcode_enabled = true
+		entry_rtl.fit_content = true
+
+		var text: String = "[color=#666666][Day %d] Form %s — %s[/color]\n" % [
+			entry.get("day", 0),
+			prior.get("form_type", ""),
+			prior.get("title", ""),
+		]
+		var choices: Dictionary = entry.get("choices", {})
+		for field_id: String in choices:
+			var opt_label: String = _find_option_label(prior, field_id, choices[field_id])
+			if opt_label != "":
+				text += "[color=#C8B99A]  → %s[/color]\n" % opt_label
+
+		entry_rtl.text = text
+		fields_container.add_child(entry_rtl)
+
+	var thread_sep := HSeparator.new()
+	thread_sep.add_theme_color_override("color", Color(0.0, 0.478, 0.722, 0.5))
+	fields_container.add_child(thread_sep)
+
+func _find_option_label(case_data: Dictionary, field_id: String, option_id: String) -> String:
+	for section: Dictionary in case_data.get("sections", []):
+		for field: Dictionary in section.get("fields", []):
+			if field.get("id", "") == field_id:
+				for opt: Dictionary in field.get("options", []):
+					if opt.get("id", "") == option_id:
+						return opt.get("label", option_id)
+	return ""
+
+# ── Field Events ──────────────────────────────────────────────────────────────
+
 func _on_field_changed(field_id: String, value: Variant, effects: Dictionary, ripples: Array) -> void:
-	# Accumulate effects for live preview
+	# Track choice selections (string values are option IDs)
+	if value is String and value != "":
+		_field_choices[field_id] = value
+
 	for key in effects:
 		if key not in _accumulated_effects:
 			_accumulated_effects[key] = 0.0
@@ -147,12 +220,13 @@ func _on_field_changed(field_id: String, value: Variant, effects: Dictionary, ri
 		if ripple not in _accumulated_ripples:
 			_accumulated_ripples.append(ripple)
 
-	# Update live preview panel
 	_update_preview(effects)
 	_update_approve_state()
-
-	# Update geometry harmony
 	_update_geometry_harmony()
+
+	# Contradiction case: update voice based on what the player is selecting
+	if _case_data.get("id", "") == CONTRADICTION_CASE_ID:
+		_update_contradiction_voice(field_id, value)
 
 func _update_preview(latest_effects: Dictionary) -> void:
 	for child in preview_container.get_children():
@@ -178,29 +252,51 @@ func _update_approve_state() -> void:
 	approve_btn.disabled = not all_satisfied
 
 func _update_geometry_harmony() -> void:
-	# Positive total effects = harmony; negative = conflict
 	var total: float = 0.0
 	for key in _accumulated_effects:
 		total += float(_accumulated_effects[key])
 	var harmony: float = clampf(total / 20.0, -1.0, 1.0)
-
 	if geometry_bg and geometry_bg.material is ShaderMaterial:
 		geometry_bg.material.set_shader_parameter("harmony_factor", harmony)
+
+# ── Contradiction Voice ───────────────────────────────────────────────────────
+
+const CONTRADICTION_VOICES := [
+	"[color=#F5EDE0][i]An inconsistency has been detected in your Continuity File. Please select the appropriate resolution. Take your time.[/i][/color]",
+	"[color=#FFB000][i]We notice that several options are… unavailable to you. This is a result of your previous decisions. Please select from what remains.[/i][/color]",
+	"[color=#FF8800][i]The Division wishes to clarify: this is not a judgment. Your accumulated contradictions are simply crystallized here. Please proceed.[/i][/color]",
+	"[color=#FF4400][i]Processor. We need you to select a resolution. The audit cannot be deferred. Please. The forms are waiting.[/i][/color]",
+]
+
+func _set_contradiction_voice(stage: int) -> void:
+	_contradiction_voice_stage = clampi(stage, 0, CONTRADICTION_VOICES.size() - 1)
+	system_voice_label.bbcode_enabled = true
+	system_voice_label.text = CONTRADICTION_VOICES[_contradiction_voice_stage]
+
+func _update_contradiction_voice(field_id: String, value: Variant) -> void:
+	# Escalate voice when player selects the costly "error_correction" option
+	if field_id == "contradiction_resolution":
+		match str(value):
+			"error_correction":
+				_set_contradiction_voice(3)
+			"approved_methodology":
+				_set_contradiction_voice(1)
+			_:
+				_set_contradiction_voice(2)
+
+# ── Form Submission ───────────────────────────────────────────────────────────
 
 func _on_approve() -> void:
 	_submit_form(true)
 
 func _on_reject() -> void:
-	# Rejecting a form inverts certain effects slightly
 	_submit_form(false)
 
 func _on_defer() -> void:
-	# Defer: no effects applied, case stays in queue
 	system_voice_label.text = "[color=#F5EDE0][i]Your hesitation has been noted and gently archived. Would you like assistance reframing it as wisdom?[/i][/color]"
 	_return_to_terminal()
 
 func _submit_form(approved: bool) -> void:
-	# Apply all accumulated effects from field choices
 	var all_effects: Dictionary = {}
 	var all_ripples: Array = []
 
@@ -213,29 +309,33 @@ func _submit_form(approved: bool) -> void:
 			all_effects[key] = float(all_effects[key]) + float(effects[key])
 		all_ripples.append_array(ripples)
 
-	# Rejection modifier: halve positive efficiency gains, double dissolution
 	if not approved:
 		if "efficiency_score" in all_effects:
 			all_effects["efficiency_score"] *= 0.5
 		if "dissolution_index" in all_effects:
 			all_effects["dissolution_index"] *= 2.0
 
-	# Apply to state
 	ContinuityState.apply_effects(all_effects)
 
-	# Queue ripples
 	for ripple in all_ripples:
 		ContinuityState.queue_ripple(ripple)
 
-	# Set completion flag
+	# Set flags declared by each selected option
+	for ff in _form_fields:
+		for flag: String in ff.get_selected_flags():
+			ContinuityState.set_flag(flag)
+
 	var completion_flag: String = _case_data.get("completion_flag", "")
 	if completion_flag != "":
 		ContinuityState.set_flag(completion_flag)
 
-	# Complete the case
+	# Record worker-unit choice history for future Thread Views
+	var char_id: String = _case_data.get("worker_unit", {}).get("id", "")
+	if char_id != "" and not char_id.begins_with("███") and not _field_choices.is_empty():
+		ContinuityState.record_character_choice(char_id, _case_data.get("id", ""), _field_choices)
+
 	ContinuityState.complete_case(_case_data.get("id", ""))
 
-	# Visual feedback
 	_flash_submit_feedback(approved)
 
 func _flash_submit_feedback(approved: bool) -> void:
@@ -258,14 +358,33 @@ func _on_state_changed(key: String, _value: Variant) -> void:
 func _return_to_terminal() -> void:
 	get_tree().change_scene_to_file(TERMINAL_SCENE)
 
+# ── Helpers ───────────────────────────────────────────────────────────────────
+
+## Replace {stat_name} tokens with live values from ContinuityState.
+func _process_template(text: String) -> String:
+	if not "{" in text:
+		return text
+	var result: String = text
+	for key: String in ContinuityState.STAT_RANGES:
+		var val = ContinuityState.get(key)
+		if val != null:
+			result = result.replace("{%s}" % key, "%.1f" % float(val))
+	result = result.replace("{clearance_level}",   str(ContinuityState.clearance_level))
+	result = result.replace("{echo_interactions}",  str(ContinuityState.echo_interactions))
+	result = result.replace("{unraveling_events}",  str(ContinuityState.unraveling_events))
+	result = result.replace("{current_day}",        str(ContinuityState.current_day))
+	return result
+
 func _portrait_color_for_case() -> Color:
 	var form_type: String = _case_data.get("form_type", "")
 	match form_type:
 		"Θ-SR1", "Θ-SR2", "Θ-SR3":
-			return Color(0.549, 0.306, 1.0, 0.6)   # Purple — self-referential
+			return Color(0.549, 0.306, 1.0, 0.6)
+		"Θ-PIR":
+			return Color(0.8, 0.2, 0.2, 0.6)    # Red — contradiction audit
 		"M-11", "M-11b":
-			return Color(1.0, 0.69, 0.0, 0.5)      # Amber — mythic
+			return Color(1.0, 0.69, 0.0, 0.5)
 		"G-7":
-			return Color(0.0, 0.722, 0.690, 0.5)   # Teal — grief
+			return Color(0.0, 0.722, 0.690, 0.5)
 		_:
-			return Color(0.3, 0.3, 0.35, 1.0)      # Neutral
+			return Color(0.3, 0.3, 0.35, 1.0)

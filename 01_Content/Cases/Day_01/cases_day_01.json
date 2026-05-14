@@ -104,9 +104,9 @@
                 {
                   "id": "full_liquidation",
                   "label": "Order full symbolic liquidation (memories repurposed)",
-                  "effects": { "efficiency_score": 10.0, "dissolution_index": 3.0, "continuity_contribution": 15.0 },
+                  "effects": { "efficiency_score": 10.0, "dissolution_index": 3.0, "continuity_contribution": 15.0, "collective_nostalgia": -5.0 },
                   "flags_set": ["marcus_hobby_liquidated"],
-                  "ripples": [{ "type": "major", "text": "Worker-Unit E-7742's model train collection has been fully liquidated. His memories have been reclassified as archived training material. A mild sense of lightness has been reported in his productivity file.", "delayed_effects": { "collective_nostalgia": -2.0 } }]
+                  "ripples": [{ "type": "major", "text": "Worker-Unit E-7742's model train collection has been fully liquidated. His memories have been reclassified as archived training material. A mild sense of lightness has been reported in his productivity file. The nostalgic field over this sector has thinned noticeably.", "delayed_effects": {} }]
                 }
               ]
             }
@@ -169,6 +169,12 @@
                 {
                   "id": "catalytic_rage",
                   "label": "Catalytic Rage (volatile — recommend Mythic Commodities)",
+                  "suppression_conditions": [
+                    {
+                      "flag": "marcus_hobby_liquidated",
+                      "message": "Volatile grief channel at capacity — Symbolic Reserve depleted by recent liquidations. Route elsewhere."
+                    }
+                  ],
                   "effects": { "mythic_commodities_index": 10.0, "dissolution_index": 2.0, "reality_stability": -3.0 },
                   "flags_set": ["elena_rage_volatile"],
                   "ripples": [{ "type": "major", "text": "Volatile grief energy has been routed to the Mythic Commodities Division. Containment protocols are standing by.", "delayed_effects": { "department_strain": 2.0 } }]
@@ -207,6 +213,7 @@
                   "id": "preserved_anchor",
                   "label": "Preserved Sacred Anchor",
                   "sublabel": "retained at personal cost",
+                  "resource_requirements": { "collective_nostalgia": 28 },
                   "effects": { "efficiency_score": -3.0, "dissolution_index": -0.5, "emotional_surplus": 5.0, "narrative_stability": 2.0 },
                   "flags_set": [],
                   "ripples": [{ "type": "small", "text": "A small act of preservation. The archive notes a minor anomaly: something was kept whole." }]
@@ -215,9 +222,9 @@
                   "id": "redacted",
                   "label": "Redacted for Systemic Health",
                   "sublabel": "full erasure — high yield",
-                  "effects": { "efficiency_score": 10.0, "dissolution_index": 2.5, "department_strain": 2.0 },
+                  "effects": { "efficiency_score": 10.0, "dissolution_index": 2.5, "department_strain": 2.0, "collective_nostalgia": -4.0 },
                   "flags_set": ["elena_memories_redacted"],
-                  "ripples": [{ "type": "major", "text": "Worker-Unit F-1193's ancestral memory cluster has been fully redacted. She will feel lighter tomorrow. She may not remember why.", "delayed_effects": { "collective_nostalgia": -3.0 } }]
+                  "ripples": [{ "type": "major", "text": "Worker-Unit F-1193's ancestral memory cluster has been fully redacted. She will feel lighter tomorrow. She may not remember why.", "delayed_effects": {} }]
                 }
               ]
             },
@@ -266,9 +273,9 @@
                 {
                   "id": "full_compression",
                   "label": "Yes — Full compression into 'Early Discipline & Wonder Management'",
-                  "effects": { "efficiency_score": 8.0, "dissolution_index": 2.5, "continuity_contribution": 12.0 },
+                  "effects": { "efficiency_score": 8.0, "dissolution_index": 2.5, "continuity_contribution": 12.0, "collective_nostalgia": -3.0 },
                   "flags_set": ["theo_childhood_compressed"],
-                  "ripples": [{ "type": "major", "text": "Worker-Unit G-5521's developmental wonder archives have been fully compressed. Productivity projections for his household are excellent.", "delayed_effects": { "collective_nostalgia": -1.5 } }]
+                  "ripples": [{ "type": "major", "text": "Worker-Unit G-5521's developmental wonder archives have been fully compressed. Productivity projections for his household are excellent.", "delayed_effects": {} }]
                 },
                 {
                   "id": "partial_preservation",
